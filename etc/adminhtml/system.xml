@@ -51,10 +51,24 @@
 					<comment><![CDATA[Enable the «<a href='https://mage2.pro/c/extensions/dynamics365' target='_blank'>Dynamics 365</a>» extension?]]></comment>
 				</field>
 				<field
+					dfWebhook_suffix='oauth'
+					id='signOnUrl'
+					translate='label'
+					type='Df\Sso\FE\CustomerReturn'
+					sortOrder='2'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Sign-On URL</label>
+					<comment><![CDATA[Set it in your Microsoft Azure Active Directory <a href='https://mage2.pro/t/3825' title='How to grant Magento 2 the permissions to access the Dynamics 365 web API?' target='_blank'>app registration form</a> (Step 4).]]></comment>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+				<field
 					id='apiKey'
 					translate='label'
 					type='obscure'
-					sortOrder='2'
+					sortOrder='3'
 					showInDefault='1'
 					showInWebsite='1'
 					showInStore='1'
