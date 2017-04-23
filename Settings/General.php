@@ -5,12 +5,6 @@ namespace Dfe\Dynamics365\Settings;
 final class General extends \Df\Config\Settings {
 	/**
 	 * 2017-04-23
-	 * @return string
-	 */
-	function apiKey() {return $this->p();}
-
-	/**
-	 * 2017-04-23
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
