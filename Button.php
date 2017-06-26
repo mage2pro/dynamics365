@@ -14,7 +14,9 @@ class Button extends AE implements ElementI {
 	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getDefaultHtml()
 	 * @return string
 	 */
-	function getElementHtml() {return df_block(W::class, ['label' => __('Authenticate')])->toHtml();}
+	function getElementHtml() {return df_block(W::class, [
+		'id' => $this->getHtmlId(), 'label' => __('Authenticate')
+	])->toHtml();}
 
 	/**
 	 * 2017-06-27
@@ -30,6 +32,7 @@ class Button extends AE implements ElementI {
 		 * Similar to @see \Magento\MediaStorage\Block\System\Config\System\Storage\Media\Synchronize::render()
 		 */
 		$this->_data = dfa_unset($this->_data, 'scope', 'can_use_website_value', 'can_use_default_value');
+		df_fe_init($this, __CLASS__);
 	}
 }
 
