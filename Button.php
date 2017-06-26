@@ -1,7 +1,8 @@
 <?php
 namespace Dfe\Dynamics365;
 use Df\Framework\Form\ElementI;
-use \Magento\Framework\Data\Form\Element\AbstractElement as AE;
+use Magento\Framework\Data\Form\Element\AbstractElement as AE;
+use Magento\Backend\Block\Widget\Button as W;
 // 2017-06-26
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Button extends AE implements ElementI {
@@ -13,7 +14,7 @@ class Button extends AE implements ElementI {
 	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getDefaultHtml()
 	 * @return string
 	 */
-	function getElementHtml() {return __METHOD__;}
+	function getElementHtml() {return df_block(W::class, ['label' => __('Authenticate')])->toHtml();}
 
 	/**
 	 * 2017-06-27
