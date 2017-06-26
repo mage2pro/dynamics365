@@ -14,11 +14,9 @@
 -->
 		<section
 			id='df_dynamics365'
+            showInDefault='1' showInStore='1' showInWebsite='1'
             translate='label'
             type='text'
-            showInDefault='1'
-            showInWebsite='1'
-            showInStore='1'
 		>
 			<tab>_df</tab>
 			<label>Dynamics 365</label>
@@ -27,24 +25,20 @@
 			<resource>Dfe_Dynamics365::config</resource>
 			<group
 				id='general'
+				showInDefault='1' showInStore='1' showInWebsite='1'
+				sortOrder='1'
 				translate='label'
 				type='text'
-				sortOrder='1'
-				showInDefault='1'
-				showInWebsite='1'
-				showInStore='1'
 			>
 				<label>General</label>
 				<dfExtension>Dfe_Dynamics365</dfExtension>
 				<frontend_model>Df\Config\Fieldset</frontend_model>
 				<field
 					id='enable'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='1'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
-					sortOrder='1'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Enable?</label>
 					<backend_model>Df\Config\Backend\Checkbox</backend_model>
@@ -52,23 +46,19 @@
 				</field>
 				<group
 					id='oauth'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='2'
 					translate='label'
 					type='text'
-					sortOrder='2'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>OAuth 2.0</label>
 					<comment><![CDATA[Microsoft Dynamics 365 authenticates the «<a href='https://mage2.pro/c/extensions/dynamics365' target='_blank'>Dynamics 365</a>» Magento 2 extension by the <a href='https://oauth.net/2/' target='_blank'>OAuth 2.0</a> protocol.]]></comment>
 					<field
 						id='clientId'
+						showInDefault='1' showInStore='1' showInWebsite='1'
+						sortOrder='1'
 						translate='label'
 						type='text'
-						sortOrder='1'
-						showInDefault='1'
-						showInWebsite='1'
-						showInStore='1'
 					>
 						<label>Client Identifier</label>
 						<comment><![CDATA[An OAuth 2.0 «Client Identifier», as defined in the <a href='https://tools.ietf.org/html/rfc6749#section-2.2' alt='RFC 6749 specification, Section 2.2: «Client Identifier»' target='_blank'>section 2.2</a> of the RFC 6749 specification.
@@ -81,12 +71,10 @@
 					</field>
 					<field
 						id='clientPassword'
+						showInDefault='1' showInStore='1' showInWebsite='1'
+						sortOrder='2'
 						translate='label'
 						type='obscure'
-						sortOrder='2'
-						showInDefault='1'
-						showInWebsite='1'
-						showInStore='1'
 					>
 						<label>Client Password</label>
 						<comment><![CDATA[The OAuth 2.0 «Client Password» for the «Client Identifier» above, as defined in the <a href='https://tools.ietf.org/html/rfc6749#section-2.3.1' alt='RFC 6749 specification, Section 2.3.1: «Client Password»' target='_blank'>section 2.3.1</a> of the RFC 6749 specification.
@@ -101,17 +89,23 @@
 					<field
 						dfWebhook_suffix='oauth'
 						id='redirectionEndpoint'
+						showInDefault='1' showInStore='1' showInWebsite='1'
+						sortOrder='3'
 						translate='label'
 						type='Df\Sso\FE\CustomerReturn'
-						sortOrder='3'
-						showInDefault='1'
-						showInWebsite='1'
-						showInStore='1'
 					>
 						<label>Redirection Endpoint</label>
 						<comment><![CDATA[The OAuth 2.0 «Redirection Endpoint», as defined in the <a href='https://tools.ietf.org/html/rfc6749#section-3.1.2' alt='RFC 6749 specification, Section 3.1.2: «Redirection Endpoint»' target='_blank'>section 3.1.2</a> of the RFC 6749 specification.
 <br/>Microsoft Azure portal names this entity as «<b>Sign-On URL</b>».
 <br/>Set it in your Microsoft Azure Active Directory <a href='https://mage2.pro/t/3825' title='How to grant Magento 2 the permissions to access the Dynamics 365 web API?' target='_blank'>app registration form</a> (Step 4).]]></comment>
+						<depends><field id='enable'>1</field></depends>
+					</field>
+					<field
+						id='authenticate'
+						showInDefault='1' showInWebsite='1' showInStore='1'
+						sortOrder='4'
+						type='Dfe\Dynamics365\Button'
+					>
 						<depends><field id='enable'>1</field></depends>
 					</field>
 				</group>
