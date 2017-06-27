@@ -29,7 +29,7 @@ class Button extends AE implements ElementI {
 	function onFormInitialized() {
 		/**
 		 * 2017-06-27
-		 * This code removes the [store view] sublabel, similar to
+		 * This code removes the «[store view]» sublabel, similar to
 		 * @see \Magento\MediaStorage\Block\System\Config\System\Storage\Media\Synchronize::render()
 		 */
 		$this->_data = dfa_unset($this->_data, 'scope', 'can_use_website_value', 'can_use_default_value');
@@ -43,11 +43,11 @@ class Button extends AE implements ElementI {
 			// 1) OAuth 2.0 auth code grant:
 			// «The Application Id assigned to your app when you registered it with Azure AD.
 			// You can find this in the Azure Portal.
-			// Click Active Directory, click the directory, choose the application, and click Configure.»
+			// Click `Active Directory`, click the directory, choose the application, and click `Configure`.»
 			// 2) OpenID Connect protocol:
 			// «The Application Id assigned to your app when you registered it with Azure AD.
 			// You can find this in the Azure Portal.
-			// Click Azure Active Directory, click App Registrations, choose the application
+			// Click `Azure Active Directory`, click `App Registrations`, choose the application
 			// and locate the Application Id on the application page.»
 			// Required.
 			// «How to grant Magento 2 the permissions to access the Dynamics 365 web API?»
@@ -67,9 +67,9 @@ class Button extends AE implements ElementI {
 			 * Note 1.
 			 * 1.1) OAuth 2.0 auth code grant: recommended.
 			 * 1.2) OpenID Connect protocol: recommended.
-			 * «The redirect_uri of your app,
+			 * «The `redirect_uri` of your app,
 			 * where authentication responses can be sent and received by your app.
-			 * It must exactly match one of the redirect_uris you registered in the portal,
+			 * It must exactly match one of the `redirect_uris` you registered in the portal,
 			 * except it must be url encoded.»
 			 * Note 2.
 			 * It uses the same algorithm as in @see \Df\Sso\FE\CustomerReturn::url()
@@ -79,33 +79,47 @@ class Button extends AE implements ElementI {
 			 */
             ,'redirect_uri' => df_url_frontend(df_route($this, 'oauth'))
 			// 2017-06-27
-			// 1) OAuth 2.0 auth code grant: optional.
-			// «The App ID URI of the web API (secured resource).
-			// To find the App ID URI of the web API, in the Azure Portal,
-			// click Active Directory, click the directory,
-			// click the application and then click Configure.»
-			// 2) OpenID Connect protocol: not used.
-            //,'resource' => $isOpenID ? null :
-			//	'https://mage2pro.onmicrosoft.com/cec9314d-df39-4163-b3ce-9cee8a393cf0'
+			// Note 1.
+			// 1.1) OAuth 2.0 auth code grant: optional.
+			// «The `App ID URI` of the web API (secured resource).
+			// To find the `App ID URI` of the web API, in the Azure Portal,
+			// click `Active Directory`, click the directory,
+			// click the application and then click `Configure`.»
+			// 1.2) OpenID Connect protocol: not used.
+			// Note 2.
+			// «How to find out the `App ID URI` of your Microsoft Azure Active Directory application?»
+			// https://mage2.pro/t/4108
+			// For my application it looks like:
+			// «https://mage2pro.onmicrosoft.com/cec9314d-df39-4163-b3ce-9cee8a393cf0»
+            ,'resource' => null
 			// 2017-06-27
-			// Recommended
+			// Recommended.
+			// 1) OAuth 2.0 auth code grant:
+			// «Specifies the method that should be used to send the resulting token back to your app.
+			// Can be `query` or `form_post`.»
+			// 2) OpenID Connect protocol:
+			// «Specifies the method that should be used to send the resulting authorization_code
+			// back to your app.
+			// Supported values are `form_post` for HTTP form post or `fragment` for URL fragment.
+			// For web applications, we recommend using `response_mode=form_post`
+			// to ensure the most secure transfer of tokens to your application.»
             ,'response_mode' => 'form_post'
 			// 2017-06-27
 			// Note 1.
-			// 1.1) OAuth 2.0 auth code grant: «Must include code for the authorization code flow.»
-			// 1.2) OpenID Connect protocol: «Must include id_token for OpenID Connect sign-in.
+			// 1.1) OAuth 2.0 auth code grant: «Must include `code` for the authorization code flow.»
+			// 1.2) OpenID Connect protocol: «Must include `id_token` for OpenID Connect sign-in.
 			// It may also include other response_types, such as code.»
 			// Required.
 			// Note 2.
 			// As I understand from the example below, the value should be space-separared
 			// https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code#get-access-tokens
 			// The «scope» parameter uses the same format.
-			,'response_type' => 'code' . (!$isOpenID ? '' : ' id_token')
+			,'response_type' => $isOpenID ? 'id_token' : 'code'
 			// 2017-06-27
 			// 1) OAuth 2.0 auth code grant: not used.
 			// 2) OpenID Connect protocol: required.
 			// «A space-separated list of scopes.
-			// For OpenID Connect, it must include the scope openid,
+			// For OpenID Connect, it must include the scope `openid`,
 			// which translates to the "Sign you in" permission in the consent UI.
 			// You may also include other scopes in this request for requesting consent.»
             ,'scope' => !$isOpenID ? null : 'openid'
