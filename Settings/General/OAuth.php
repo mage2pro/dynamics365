@@ -5,6 +5,7 @@ namespace Dfe\Dynamics365\Settings\General;
 final class OAuth extends \Df\Config\Settings {
 	/**
 	 * 2017-04-23
+	 * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
 	 * @return string
 	 */
 	function clientId() {return $this->v();}
