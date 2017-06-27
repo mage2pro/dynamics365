@@ -62,6 +62,26 @@ class Button extends AE implements ElementI {
 			// The value is typically a randomized, unique string or GUID
 			// that can be used to identify the origin of the request.»
             ,'nonce' => !$isOpenID ? null : df_uid()
+			// 2017-06-27
+			// 1) OAuth 2.0 auth code grant:
+			// «Indicate the type of user interaction that is required.
+			// Valid values are:
+			// 1.1) `login`: The user should be prompted to reauthenticate.
+			// 1.2) `consent`: User consent has been granted, but needs to be updated.
+			// The user should be prompted to consent.
+			// 1.3) `admin_consent`: An administrator should be prompted to consent
+			// on behalf of all users in their organization.»
+			// 2) OpenID Connect protocol:
+			// «Indicates the type of user interaction that is required.
+			// Currently, the only valid values are `login`, `none`, and `consent`.
+			// 2.1) `prompt=login` forces the user to enter their credentials on that request,
+			// negating single-sign on.
+			// 2.2) `prompt=none` is the opposite - it ensures that the user is not presented
+			// with any interactive prompt whatsoever.
+			// If the request cannot be completed silently via single-sign on, the endpoint returns an error.
+			// 2.3) `prompt=consent` triggers the OAuth consent dialog after the user signs in,
+			// asking the user to grant permissions to the app.»
+			,'prompt' => 'consent'
 			/**
 			 * 2017-06-27
 			 * Note 1.
