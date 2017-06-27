@@ -123,7 +123,15 @@ class Button extends AE implements ElementI {
 			// which translates to the "Sign you in" permission in the consent UI.
 			// You may also include other scopes in this request for requesting consent.»
             ,'scope' => !$isOpenID ? null : 'openid'
-            ,'state' => ''
+			// 2017-06-27
+			// 1) OAuth 2.0 auth code grant: recommended.
+			// 2) OpenID Connect protocol: recommended.
+			// «A value included in the request that is also returned in the token response.
+			// A randomly generated unique value is typically used
+			// for preventing cross-site request forgery attacks.
+			// The state is also used to encode information about the user's state in the app
+			// before the authentication request occurred, such as the page or view they were on.»
+            ,'state' => null
 		]));
 		df_fe_init($this, __CLASS__, [], ['url' => $url]);
 	}
