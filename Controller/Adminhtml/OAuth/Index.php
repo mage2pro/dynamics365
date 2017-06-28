@@ -39,7 +39,7 @@ class Index extends \Df\OAuth\ReturnT {
 	 * @throws DFE
 	 */
 	final protected function _execute() {
-		$this->checkResponse();
+		$this->validateResponse();
 		/**
 		 * 2017-06-28
 		 * @var string $state
@@ -108,7 +108,8 @@ class Index extends \Df\OAuth\ReturnT {
 		 * @var array(string => mixed) $r
 		 */
 		$r = df_json_decode($c->request()->getBody());
-		$this->checkResponse($r);
+		$this->validateResponse($r);
+		
 		df_log_l($this, $r);
 	}
 
@@ -129,7 +130,7 @@ class Index extends \Df\OAuth\ReturnT {
 	 * @param array(string => mixed)|null $r [optional]
 	 * @throws DFE
 	 */
-	private function checkResponse($r = null) {
+	private function validateResponse($r = null) {
 		if (is_null($r)) {
 			$r = df_request();
 		}
