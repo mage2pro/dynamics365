@@ -167,7 +167,7 @@ class Button extends AE implements ElementI {
 			// for preventing cross-site request forgery attacks.
 			// The state is also used to encode information about the user's state in the app
 			// before the authentication request occurred, such as the page or view they were on.»
-            ,'state' => null
+            ,'state' => df_current_url()
 		]));
 		df_fe_init($this, __CLASS__, [], ['url' => $url]);
 	}
