@@ -54,9 +54,23 @@
 					<label>OAuth 2.0</label>
 					<comment><![CDATA[Microsoft Dynamics 365 authenticates the «<a href='https://mage2.pro/c/extensions/dynamics365' target='_blank'>Dynamics 365</a>» Magento 2 extension by the <a href='https://oauth.net/2/' target='_blank'>OAuth 2.0</a> protocol.]]></comment>
 					<field
+						id='url'
+						showInDefault='1' showInStore='1' showInWebsite='1'
+						sortOrder='2'
+						translate='label'
+						type='text'
+					>
+						<label>The root URL of your Dynamics 365 frontend</label>
+						<comment><![CDATA[The value should like https://<b>&lt;your organization name&gt;</b>.crm.dynamics.com for a <a href='https://www.microsoft.com/en-US/Dynamics/crm-customer-center/dynamics-365-online-vs-on-premises-features-faq.aspx' target='_blank' title='Online vs on-premises features FAQ'>SaaS (cloud, «online»)</a> instance, and is a custom URL for a <a href='https://technet.microsoft.com/en-us/library/hh699811.aspx' target='_blank' title='Deploy and administer Dynamics 365 (on-premises)'>self-hosted («on-premises»)</a> instance.<br/><a href='https://mage2.pro/t/3737' alt='See the manual how to find it out' target='_blank'>Where is my Dynamics 365 frontend located?</a>]]></comment>
+						<depends>
+							<field id='enable'>1</field>
+						</depends>
+						<validate>required-entry</validate>
+					</field>
+					<field
 						id='clientId'
 						showInDefault='1' showInStore='1' showInWebsite='1'
-						sortOrder='1'
+						sortOrder='2'
 						translate='label'
 						type='text'
 					>
@@ -72,7 +86,7 @@
 					<field
 						id='clientPassword'
 						showInDefault='1' showInStore='1' showInWebsite='1'
-						sortOrder='2'
+						sortOrder='3'
 						translate='label'
 						type='obscure'
 					>
@@ -91,7 +105,7 @@
 						dfWebhook_suffix='oauth'
 						id='redirectionEndpoint'
 						showInDefault='1' showInStore='1' showInWebsite='1'
-						sortOrder='3'
+						sortOrder='4'
 						translate='label'
 						type='Df\Sso\FE\CustomerReturn'
 					>
@@ -104,7 +118,7 @@
 					<field
 						id='authenticate'
 						showInDefault='1' showInWebsite='1' showInStore='1'
-						sortOrder='4'
+						sortOrder='5'
 						type='Dfe\Dynamics365\Button'
 					>
 						<depends><field id='enable'>1</field></depends>

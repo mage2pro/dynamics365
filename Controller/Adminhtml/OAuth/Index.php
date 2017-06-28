@@ -10,6 +10,9 @@
  */
 namespace Dfe\Dynamics365\Controller\Adminhtml\OAuth;
 use Df\Core\Exception as DFE;
+use Dfe\Dynamics365\OAuth;
+use Dfe\Dynamics365\Settings\General\OAuth as S;
+use Zend_Http_Client as C;
 /**
  * 2017-06-27
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -36,17 +39,7 @@ class Index extends \Df\OAuth\ReturnT {
 	 * @throws DFE
 	 */
 	final protected function _execute() {
-		if ($error = df_request('error')) {
-			df_error_html("[<b>$error</b>] %s", df_request('error_description'));
-		}
-		/**
-		 * 2017-06-28
-		 * @var string $code
-		 * A string of 611 caracters.
-		 * «The authorization code that the application requested.
-		 * The application can use the authorization code to request an access token for the target resource.»
-		 */
-		$code = df_request('code');
+		$this->checkResponse();
 		/**
 		 * 2017-06-28
 		 * @var string $state
@@ -56,6 +49,67 @@ class Index extends \Df\OAuth\ReturnT {
 		 */
 		$sessionState = df_request('session_state');
 		df_log_l($this, $_REQUEST);
+		// 2017-06-28
+		// «Now that you've acquired an authorization code and have been granted permission by the user,
+		// you can redeem the code for an access token to the desired resource,
+		// by sending a POST request to the `/token` endpoint.»
+		// «Use the authorization code to request an access token»:
+		// https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#use-the-authorization-code-to-request-an-access-token
+		/** @var C $c */
+		$c = (new C)
+			->setConfig(['timeout' => 120])
+			->setHeaders(['accept' => 'application/json'])
+			->setMethod(C::POST)
+			->setParameterPost(OAuth::p() + [
+				'client_secret' => S::s()->clientPassword()
+				// 2017-06-28
+				// Required
+				// 1) «The `authorization_code` that you acquired in the previous section».
+				// «Use the authorization code to request an access token»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#use-the-authorization-code-to-request-an-access-token
+				// 2) «The authorization code that the application requested.
+				// The application can use the authorization code
+				// to request an access token for the target resource.»
+				// «Successful response»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response
+				// 3) My note: a string of 611 caracters.
+				,'code' => df_request('code')
+				// 2017-06-28
+				// Required.
+				// «Must be `authorization_code` for the authorization code flow».
+				,'grant_type' => 'authorization_code'
+			])
+			->setUri('https://login.microsoftonline.com/common/oauth2/token')
+		;
+		/**
+		 * 2017-06-28
+		 * A successful response looks like:
+		 *	{
+		 *		"token_type": "Bearer",
+		 *		"scope": "user_impersonation",
+		 *		"expires_in": "3600",
+		 *		"ext_expires_in": "0",
+		 *		"expires_on": "1498666110",
+		 *		"not_before": "1498662210",
+		 *		"resource": "https://mage2.crm.dynamics.com",
+		 *		"access_token": <a string of 446 caracters>,
+		 *		"refresh_token": <a string of 824 caracters>,
+		 *		"id_token": <a string of 697 caracters>
+		 *	}
+		 * An error response looks like:
+		 *	{
+		 *		"error": "invalid_resource",
+		 *		"error_description": "AADSTS50001: Resource identifier is not provided.\r\nTrace ID: b4546deb-82b7-410a-b79d-191380244200\r\nCorrelation ID: 0dcc3112-7b8d-4010-9e06-60f046132fea\r\nTimestamp: 2017-06-28 14:35:58Z",
+		 *		"error_codes": [
+		 *			50001
+		 *		],
+		 *		"timestamp": "2017-06-28 14:35:58Z",
+		 *		"trace_id": "b4546deb-82b7-410a-b79d-191380244200",
+		 *		"correlation_id": "0dcc3112-7b8d-4010-9e06-60f046132fea"
+		 *	}
+		 * @var array(string => mixed) $r
+		 */
+		$r = df_json_decode($c->request()->getBody());
+		$this->checkResponse($r);
+		df_log_l($this, $r);
 	}
 
 	/**
@@ -68,4 +122,19 @@ class Index extends \Df\OAuth\ReturnT {
 	 * @return string
 	 */
 	protected function redirectUrlKey() {return 'state';}
+
+	/**
+	 * 2017-06-28
+	 * @used-by _execute()
+	 * @param array(string => mixed)|null $r [optional]
+	 * @throws DFE
+	 */
+	private function checkResponse($r = null) {
+		if (is_null($r)) {
+			$r = df_request();
+		}
+		if ($error = dfa($r, 'error')) {
+			df_error_html("[<b>$error</b>] %s", nl2br(dfa($r, 'error_description')));
+		}
+	}
 }

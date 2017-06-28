@@ -1,7 +1,6 @@
 <?php
 namespace Dfe\Dynamics365;
 use Df\Framework\Form\ElementI;
-use Dfe\Dynamics365\Settings\General\OAuth as S;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Backend\Block\Widget\Button as W;
 // 2017-06-26
@@ -37,22 +36,8 @@ class Button extends AE implements ElementI {
 		// OpenID Connect protocol: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code#send-the-sign-in-request
 		// OAuth 2.0 auth code grant: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code
 		// «common» is a special tenant identifier value to request a tenant-independent token:
-		$isOpenID = false; $s = S::s();  /** @var bool $isOpenID */ /** @var S $s */
+		$isOpenID = false;  /** @var bool $isOpenID */
 		$url = 'https://login.microsoftonline.com/common/oauth2/authorize?' . http_build_query(df_clean([
-			// 2017-06-27
-			// 1) OAuth 2.0 auth code grant:
-			// «The Application Id assigned to your app when you registered it with Azure AD.
-			// You can find this in the Azure Portal.
-			// Click `Active Directory`, click the directory, choose the application, and click `Configure`.»
-			// 2) OpenID Connect protocol:
-			// «The Application Id assigned to your app when you registered it with Azure AD.
-			// You can find this in the Azure Portal.
-			// Click `Azure Active Directory`, click `App Registrations`, choose the application
-			// and locate the Application Id on the application page.»
-			// Required.
-			// «How to grant Magento 2 the permissions to access the Dynamics 365 web API?»
-			// https://mage2.pro/t/3825
-            'client_id' => $s->clientId()
 			// 2017-06-27
 			// 1) OAuth 2.0 auth code grant: optional.
 			// «Provides a hint about the tenant or domain that the user should use to sign in.
@@ -60,7 +45,7 @@ class Button extends AE implements ElementI {
 			// If the tenant is federated to an on-premises directory,
 			// AAD redirects to the specified tenant federation server.»
 			// 2) OpenID Connect protocol: not used.
-			,'domain_hint' => null
+			'domain_hint' => null
 			// 2017-06-27
 			// 1) OAuth 2.0 auth code grant: optional.
 			// 2) OpenID Connect protocol: optional.
@@ -98,36 +83,6 @@ class Button extends AE implements ElementI {
 			// 2.3) `prompt=consent` triggers the OAuth consent dialog after the user signs in,
 			// asking the user to grant permissions to the app.»
 			,'prompt' => 'consent'
-			/**
-			 * 2017-06-27
-			 * Note 1.
-			 * 1.1) OAuth 2.0 auth code grant: recommended.
-			 * 1.2) OpenID Connect protocol: recommended.
-			 * «The `redirect_uri` of your app,
-			 * where authentication responses can be sent and received by your app.
-			 * It must exactly match one of the `redirect_uris` you registered in the portal,
-			 * except it must be url encoded.»
-			 * Note 2.
-			 * It uses the same algorithm as in @see \Df\Sso\FE\CustomerReturn::url()
-			 * https://github.com/mage2pro/dynamics365/blob/0.0.5/etc/adminhtml/system.xml#L102
-			 * https://github.com/mage2pro/dynamics365/blob/0.0.5/etc/adminhtml/system.xml#L105
-			 * https://github.com/mage2pro/core/blob/2.7.23/Sso/FE/CustomerReturn.php#L28-L30
-			 */
-            ,'redirect_uri' => df_url_backend_ns(df_route($this, 'oauth', true))
-			// 2017-06-27
-			// Note 1.
-			// 1.1) OAuth 2.0 auth code grant: optional.
-			// «The `App ID URI` of the web API (secured resource).
-			// To find the `App ID URI` of the web API, in the Azure Portal,
-			// click `Active Directory`, click the directory,
-			// click the application and then click `Configure`.»
-			// 1.2) OpenID Connect protocol: not used.
-			// Note 2.
-			// «How to find out the `App ID URI` of your Microsoft Azure Active Directory application?»
-			// https://mage2.pro/t/4108
-			// For my application it looks like:
-			// «https://mage2pro.onmicrosoft.com/cec9314d-df39-4163-b3ce-9cee8a393cf0»
-            ,'resource' => null
 			// 2017-06-27
 			// Recommended.
 			// 1) OAuth 2.0 auth code grant:
@@ -168,7 +123,7 @@ class Button extends AE implements ElementI {
 			// The state is also used to encode information about the user's state in the app
 			// before the authentication request occurred, such as the page or view they were on.»
             ,'state' => df_current_url()
-		]));
+		] + OAuth::p()));
 		df_fe_init($this, __CLASS__, [], ['url' => $url]);
 	}
 }

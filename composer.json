@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/dynamics365"
-	,"version": "0.0.7"
+	,"version": "0.0.8"
 	,"description": "The «Microsoft Dynamics 365» extension for Magento 2."
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro/c/extensions/dynamics365"
