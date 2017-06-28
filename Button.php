@@ -122,9 +122,29 @@ class Button extends AE implements ElementI {
 			// for preventing cross-site request forgery attacks.
 			// The state is also used to encode information about the user's state in the app
 			// before the authentication request occurred, such as the page or view they were on.»
-            ,'state' => df_current_url()
+            ,'state' => df_json_encode([
+				/**
+				 * 2017-06-29
+				 * We will store the refresh token in this configuration scope.
+				 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index
+				 */
+            	'scope' => df_scope()
+				/**
+				 * 2017-06-29
+				 * The page we need to return to after the authentication.
+				 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index
+				 */
+            	,self::URL => df_current_url()
+			])
 		] + OAuth::p()));
 		df_fe_init($this, __CLASS__, [], ['url' => $url]);
 	}
+
+	/**
+	 * 2017-06-29
+	 * @used-by onFormInitialized()
+	 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::redirectUrl()
+	 */
+	const URL = 'url';
 }
 
