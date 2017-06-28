@@ -113,7 +113,7 @@ class Button extends AE implements ElementI {
 			 * https://github.com/mage2pro/dynamics365/blob/0.0.5/etc/adminhtml/system.xml#L105
 			 * https://github.com/mage2pro/core/blob/2.7.23/Sso/FE/CustomerReturn.php#L28-L30
 			 */
-            ,'redirect_uri' => df_url_frontend(df_route($this, 'oauth'))
+            ,'redirect_uri' => df_url_backend_ns(df_route($this, 'oauth', true))
 			// 2017-06-27
 			// Note 1.
 			// 1.1) OAuth 2.0 auth code grant: optional.

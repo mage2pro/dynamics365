@@ -87,6 +87,7 @@
 						<validate>required-entry</validate>
 					</field>
 					<field
+						dfWebhook_backend='true'
 						dfWebhook_suffix='oauth'
 						id='redirectionEndpoint'
 						showInDefault='1' showInStore='1' showInWebsite='1'
