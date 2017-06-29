@@ -41,6 +41,7 @@ class Index extends \Df\OAuth\ReturnT {
 	 */
 	final protected function _execute() {
 		$this->validateResponse();
+		$s = S::s(); /** @var S $s */
 		/**
 		 * 2017-06-28
 		 * @var string $state
@@ -62,7 +63,7 @@ class Index extends \Df\OAuth\ReturnT {
 			->setHeaders(['accept' => 'application/json'])
 			->setMethod(C::POST)
 			->setParameterPost(OAuth::p() + [
-				'client_secret' => S::s()->clientPassword()
+				'client_secret' => $s->clientPassword()
 				// 2017-06-28
 				// Required
 				// 1) «The `authorization_code` that you acquired in the previous section».
@@ -162,6 +163,7 @@ class Index extends \Df\OAuth\ReturnT {
 		 * @var string $refreshToken
 		 */
 		$refreshToken = $r['refresh_token'];
+		$s->refreshTokenSave($refreshToken, ...($this->state(B::SCOPE)));
 		df_log_l($this, $r);
 	}
 

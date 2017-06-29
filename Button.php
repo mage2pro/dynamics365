@@ -128,7 +128,7 @@ class Button extends AE implements ElementI {
 				 * We will store the refresh token in this configuration scope.
 				 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index
 				 */
-            	'scope' => df_scope()
+            	self::SCOPE => df_scope()
 				/**
 				 * 2017-06-29
 				 * The page we need to return to after the authentication.
@@ -140,6 +140,12 @@ class Button extends AE implements ElementI {
 		df_fe_init($this, __CLASS__, [], ['url' => $url]);
 	}
 
+	/**
+	 * 2017-06-29
+	 * @used-by onFormInitialized()
+	 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::_execute()
+	 */
+	const SCOPE = 'scope';
 	/**
 	 * 2017-06-29
 	 * @used-by onFormInitialized()

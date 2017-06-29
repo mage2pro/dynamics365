@@ -17,6 +17,22 @@ final class OAuth extends \Df\Config\Settings {
 	function clientPassword() {return $this->p();}
 
 	/**
+	 * 2017-06-29
+	 * @return string
+	 */
+	function refreshToken() {return $this->v();}
+
+	/**
+	 * 2017-06-29
+	 * @param string $v
+	 * @param string $scope		E.g.: «default»
+	 * @param int $scopeId		E.g.: «0»
+	 */
+	function refreshTokenSave($v, $scope, $scopeId) {df_cfg_save(
+		"{$this->prefix()}/refreshToken", $v, $scope, $scopeId
+	);}
+
+	/**
 	 * 2017-06-28 «The root URL of your Dynamics 365 frontend»
 	 * @used-by \Dfe\Dynamics365\OAuth::p()
 	 * @return string
@@ -28,6 +44,7 @@ final class OAuth extends \Df\Config\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
+	 * @used-by refreshTokenSave()
 	 * @return string
 	 */
 	protected function prefix() {return 'df_dynamics365/general/oauth';}
