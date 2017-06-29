@@ -1,11 +1,27 @@
 <?php
 namespace Dfe\Dynamics365;
 use Df\Framework\Form\ElementI;
+use Magento\Config\Model\Config\CommentInterface as IComment;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Backend\Block\Widget\Button as W;
 // 2017-06-26
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
-class Button extends AE implements ElementI {
+class Button extends AE implements ElementI, IComment {
+	/**
+	 * 2017-06-29
+	 * «How to implement a dynamically generated comment for a backend configuration field?»
+	 * https://mage2.pro/t/4076
+	 * @override
+	 * @see IComment::getCommentText()
+	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::getComment()
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L115-L116
+	 * @param string $v
+	 * @return $v
+	 */
+	function getCommentText($v) {return
+		'<b>You need to authenticate the Magento extension to your Dynamics 365 instance.</b>'
+	;}
+
 	/**
 	 * 2017-06-27
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
