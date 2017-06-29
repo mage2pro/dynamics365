@@ -46,8 +46,9 @@ class Index extends \Df\OAuth\ReturnT {
 		 * 2017-06-28
 		 * @var string $state
 		 * A string like «4be3f979-ebcd-4846-9898-6cf007756456».
-		 * «The authorization code that the application requested.
-		 * The application can use the authorization code to request an access token for the target resource.»
+		 * 2017-06-29
+		 * «A unique value that identifies the current user session.
+		 * This value is a GUID, but should be treated as an opaque value that is passed without examination.»
 		 */
 		$sessionState = df_request('session_state');
 		df_log_l($this, $_REQUEST);
