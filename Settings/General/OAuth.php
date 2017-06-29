@@ -1,5 +1,7 @@
 <?php
 namespace Dfe\Dynamics365\Settings\General;
+use Magento\Framework\App\ScopeInterface as S;
+use Magento\Store\Model\Store;
 // 2017-04-23
 /** @method static OAuth s() */
 final class OAuth extends \Df\Config\Settings {
@@ -18,14 +20,17 @@ final class OAuth extends \Df\Config\Settings {
 
 	/**
 	 * 2017-06-29
-	 * @return string
+	 * @param null|string|int|S|Store|array(string, int) $s [optional]
+	 * @return string|null
 	 */
-	function refreshToken() {return $this->v();}
+	function refreshToken($s = null) {return $this->v(null, $s);}
 
 	/**
 	 * 2017-06-29
+	 * @see \Magento\Store\Model\ScopeInterface::SCOPE_STORES
+	 * @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES
 	 * @param string $v
-	 * @param string $scope		E.g.: «default»
+	 * @param string $scope		«default», «websites», or «stores»
 	 * @param int $scopeId		E.g.: «0»
 	 */
 	function refreshTokenSave($v, $scope, $scopeId) {df_cfg_save(

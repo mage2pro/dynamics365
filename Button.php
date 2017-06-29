@@ -1,6 +1,7 @@
 <?php
 namespace Dfe\Dynamics365;
 use Df\Framework\Form\ElementI;
+use Dfe\Dynamics365\Settings\General\OAuth as S;
 use Magento\Config\Model\Config\CommentInterface as IComment;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Backend\Block\Widget\Button as W;
@@ -18,8 +19,9 @@ class Button extends AE implements ElementI, IComment {
 	 * @param string $v
 	 * @return $v
 	 */
-	function getCommentText($v) {return
-		'<b>You need to authenticate the Magento extension to your Dynamics 365 instance.</b>'
+	function getCommentText($v) {return S::s()->refreshToken(df_scope())
+		? '<b>The Magento extension is successfully authenticated to your Dynamics 365 instance.</b>'
+		: '<b>You need to authenticate the Magento extension to your Dynamics 365 instance.</b>'
 	;}
 
 	/**
