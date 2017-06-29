@@ -52,7 +52,7 @@
 					type='text'
 				>
 					<label>OAuth 2.0</label>
-					<comment><![CDATA[Microsoft Dynamics 365 authenticates the «<a href='https://mage2.pro/c/extensions/dynamics365' target='_blank'>Dynamics 365</a>» Magento 2 extension by the <a href='https://oauth.net/2/' target='_blank'>OAuth 2.0</a> protocol.]]></comment>
+					<comment><![CDATA[Your Dynamics 365 instance should authenticate your Magento instance by the <a href='https://oauth.net/2/' target='_blank'>OAuth 2.0</a> protocol.]]></comment>
 					<field
 						id='url'
 						showInDefault='1' showInStore='1' showInWebsite='1'

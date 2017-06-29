@@ -17,11 +17,11 @@ class Button extends AE implements ElementI, IComment {
 	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::getComment()
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L115-L116
 	 * @param string $v
-	 * @return $v
+	 * @return string
 	 */
-	function getCommentText($v) {return S::s()->refreshToken(df_scope())
-		? '<b>The Magento extension is successfully authenticated to your Dynamics 365 instance.</b>'
-		: '<b>You need to authenticate the Magento extension to your Dynamics 365 instance.</b>'
+	function getCommentText($v) {return $this->authenticated()
+		? "<b>Your Magento instance is <span class='df-ok'>successfully authenticated</span> to your Dynamics 365 instance.</b>"
+		: "<b>You <span class='df-warning'>need to authenticate</span> your Magento instance to your Dynamics 365 instance.</b>"
 	;}
 
 	/**
@@ -33,7 +33,7 @@ class Button extends AE implements ElementI, IComment {
 	 * @return string
 	 */
 	function getElementHtml() {return df_block(W::class, [
-		'id' => $this->getHtmlId(), 'label' => __('Authenticate')
+		'id' => $this->getHtmlId(), 'label' => __($this->authenticated() ? 'Re-authenticate' : 'Authenticate')
 	])->toHtml();}
 
 	/**
@@ -157,6 +157,15 @@ class Button extends AE implements ElementI, IComment {
 		] + OAuth::p()));
 		df_fe_init($this, __CLASS__, [], ['url' => $url]);
 	}
+
+	/**
+	 * 2017-06-29
+	 * @used-by getCommentText()
+	 * @return bool
+	 */
+	private function authenticated() {return dfc($this, function() {return
+		!!S::s()->refreshToken(df_scope())
+	;});}
 
 	/**
 	 * 2017-06-29
