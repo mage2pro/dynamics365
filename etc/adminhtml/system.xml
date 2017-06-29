@@ -61,7 +61,7 @@
 						type='text'
 					>
 						<label>The root URL of your Dynamics 365 frontend</label>
-						<comment><![CDATA[The value should like https://<b>&lt;your organization name&gt;</b>.crm.dynamics.com for a <a href='https://www.microsoft.com/en-US/Dynamics/crm-customer-center/dynamics-365-online-vs-on-premises-features-faq.aspx' target='_blank' title='Online vs on-premises features FAQ'>SaaS (cloud, «online»)</a> instance, and is a custom URL for a <a href='https://technet.microsoft.com/en-us/library/hh699811.aspx' target='_blank' title='Deploy and administer Dynamics 365 (on-premises)'>self-hosted («on-premises»)</a> instance.<br/><a href='https://mage2.pro/t/3737' alt='See the manual how to find it out' target='_blank'>Where is my Dynamics 365 frontend located?</a>]]></comment>
+						<comment><![CDATA[The value should like https://<b>&lt;your organization name&gt;</b>.crm.dynamics.com for a <a href='https://www.microsoft.com/en-US/Dynamics/crm-customer-center/dynamics-365-online-vs-on-premises-features-faq.aspx' target='_blank' title='Online vs on-premises features FAQ'>SaaS</a> (cloud, «online») instance, and is a custom URL for a <a href='https://technet.microsoft.com/en-us/library/hh699811.aspx' target='_blank' title='Deploy and administer Dynamics 365 (on-premises)'>self-hosted</a> («on-premises») instance.<br/><a href='https://mage2.pro/t/3737' alt='See the manual how to find it out' target='_blank'>Where is my Dynamics 365 frontend located?</a>]]></comment>
 						<depends>
 							<field id='enable'>1</field>
 						</depends>
