@@ -41,7 +41,8 @@ final class OAuth extends \Df\Config\Settings {
 
 	/**
 	 * 2017-06-28 «The root URL of your Dynamics 365 frontend»
-	 * @used-by \Dfe\Dynamics365\OAuth::p()
+	 * @used-by \Dfe\Dynamics365\OAuth::r()
+	 * @used-by \Dfe\Dynamics365\OAuth::tokenP()
 	 * @return string
 	 */
 	function url() {return $this->v();}

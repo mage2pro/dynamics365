@@ -154,7 +154,7 @@ class Button extends AE implements ElementI, IComment {
 				 */
             	,self::URL => df_current_url()
 			])
-		] + OAuth::p()));
+		] + OAuth::tokenP()));
 		df_fe_init($this, __CLASS__, [], ['url' => $url]);
 	}
 

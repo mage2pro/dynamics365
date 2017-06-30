@@ -6,49 +6,27 @@ use Zend_Http_Client as C;
 // 2017-06-28
 final class OAuth {
 	/**
-	 * 2017-06-29
-	 * Note 1.
-	 * «The requested access token.
-	 * The app can use this token to authenticate to the secured resource, such as a web API.»
-	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response-1
-	 * Note 2.
-	 * «Access Tokens are short-lived
-	 * and must be refreshed after they expire to continue accessing resources.
-	 * You can refresh the access_token by submitting another POST request to the `/token` endpoint,
-	 * but this time providing the `refresh_token` instead of the `code`.»
-	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#refreshing-the-access-tokens
-	 * Note 3 (mine). It is string of 446 caracters.
-	 * Note 4.
-	 * «Azure AD returns an access token upon a successful response.
-	 * To minimize network calls from the client application and their associated latency,
-	 * the client application should cache access tokens for the token lifetime
-	 * that is specified in the OAuth 2.0 response.
-	 * To determine the token lifetime, use either the `expires_in` or `expires_on` parameter values.
-	 * If a web API resource returns an `invalid_token` error code,
-	 * this might indicate that the resource has determined that the token is expired.
-	 * If the client and resource clock times are different (known as a "time skew"),
-	 * the resource might consider the token to be expired
-	 * before the token is cleared from the client cache.
-	 * If this occurs, clear the token from the cache, even if it is still within its calculated lifetime.»
-	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response-1
-	 * @return string
-	 * @throws DFE
+	 * 2017-06-30
+	 * @param string $path
+	 * @param string $method [optional]
+	 * @param array(string => mixed) $p [optional]
+	 * @return array(string => mixed)
 	 */
-	static function token() {
-		/** @var string|null $r */
-		static $r;
-		/** @var int $expiration */
-		static $expiration;
-		if ($r && time() > $expiration) {
-			$r = null;
-		}
-		if (!$r) {
-			/** @var array(string => mixed) $a */
-			$a = self::apiToken(['grant_type' => 'refresh_token', 'refresh_token' => S::s()->refreshToken()]);
-			$r = $a['access_token'];
-			$expiration = time() + round(0.8 * $a['expires_in']);
-		}
-		return $r;
+	static function r($path, $method = C::GET, array $p = []) {
+		/** @var C $c */
+		$c = (new C)
+			->setConfig(['timeout' => 120])
+			->setHeaders([
+				'Accept' => 'application/json'
+				,'Authorization' => 'Bearer ' . self::token()
+				,'OData-MaxVersion' => '4.0'
+				,'OData-Version' => '4.0'
+			])
+			->setMethod($method)
+			->setUri(S::s()->url() . $path)
+		;
+		C::GET === $method ? $c->setParameterGet($p) : $c->setParameterPost($p);
+		return df_json_decode($c->request()->getBody());
 	}
 
 	/**
@@ -93,11 +71,11 @@ final class OAuth {
 
 	/**
 	 * 2017-06-28
+	 * @used-by apiToken()
 	 * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
-	 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::_execute()
 	 * @return array(string => string)
 	 */
-	static function p() {/** @var S $s */ $s = S::s(); return df_clean([
+	static function tokenP() {/** @var S $s */ $s = S::s(); return df_clean([
 		// 2017-06-27
 		// 1) OAuth 2.0 auth code grant:
 		// «The Application Id assigned to your app when you registered it with Azure AD.
@@ -195,7 +173,7 @@ final class OAuth {
 			->setConfig(['timeout' => 120])
 			->setHeaders(['accept' => 'application/json'])
 			->setMethod(C::POST)
-			->setParameterPost(self::p() + $key + [
+			->setParameterPost(self::tokenP() + $key + [
 				'client_secret' => S::s()->clientPassword()
 
 			])
@@ -231,6 +209,53 @@ final class OAuth {
 		 */
 		$r = df_json_decode($c->request()->getBody());
 		self::validateResponse($r);
+		return $r;
+	}
+
+	/**
+	 * 2017-06-29
+	 * Note 1.
+	 * «The requested access token.
+	 * The app can use this token to authenticate to the secured resource, such as a web API.»
+	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response-1
+	 * Note 2.
+	 * «Access Tokens are short-lived
+	 * and must be refreshed after they expire to continue accessing resources.
+	 * You can refresh the access_token by submitting another POST request to the `/token` endpoint,
+	 * but this time providing the `refresh_token` instead of the `code`.»
+	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#refreshing-the-access-tokens
+	 * Note 3 (mine). It is string of 446 caracters.
+	 * Note 4.
+	 * «Azure AD returns an access token upon a successful response.
+	 * To minimize network calls from the client application and their associated latency,
+	 * the client application should cache access tokens for the token lifetime
+	 * that is specified in the OAuth 2.0 response.
+	 * To determine the token lifetime, use either the `expires_in` or `expires_on` parameter values.
+	 * If a web API resource returns an `invalid_token` error code,
+	 * this might indicate that the resource has determined that the token is expired.
+	 * If the client and resource clock times are different (known as a "time skew"),
+	 * the resource might consider the token to be expired
+	 * before the token is cleared from the client cache.
+	 * If this occurs, clear the token from the cache, even if it is still within its calculated lifetime.»
+	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response-1
+	 * @used-by r()
+	 * @return string
+	 * @throws DFE
+	 */
+	private static function token() {
+		/** @var string|null $r */
+		static $r;
+		/** @var int $expiration */
+		static $expiration;
+		if ($r && time() > $expiration) {
+			$r = null;
+		}
+		if (!$r) {
+			/** @var array(string => mixed) $a */
+			$a = self::apiToken(['grant_type' => 'refresh_token', 'refresh_token' => S::s()->refreshToken()]);
+			$r = $a['access_token'];
+			$expiration = time() + round(0.8 * $a['expires_in']);
+		}
 		return $r;
 	}
 }
