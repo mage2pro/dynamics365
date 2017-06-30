@@ -21,6 +21,7 @@ final class OAuth extends \Df\Config\Settings {
 	/**
 	 * 2017-06-29
 	 * @used-by \Dfe\Dynamics365\Button::getCommentText()
+	 * @used-by \Dfe\Dynamics365\OAuth::token()
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @return string|null
 	 */
