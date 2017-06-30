@@ -177,6 +177,10 @@ final class OAuth {
 				'client_secret' => S::s()->clientPassword()
 
 			])
+			// 2017-06-30
+			// @todo Whether it works for an on-premises Dynamics 365 instance?
+			// I do not have an on-premises instance, so I am unable to test it... :-(
+			// «OAuth authorization endpoints» https://msdn.microsoft.com/en-us/library/dn531009.aspx#Anchor_7
 			->setUri('https://login.microsoftonline.com/common/oauth2/token')
 		;
 		/**
