@@ -165,6 +165,8 @@ class Index extends \Df\OAuth\ReturnT {
 		 */
 		$refreshToken = $r['refresh_token'];
 		$s->refreshTokenSave($refreshToken, ...($this->state(B::SCOPE)));
+		// 2017-06-30 It is required, because the backend settings are cached.
+		df_cache_clean();
 		df_log_l($this, $r);
 	}
 
