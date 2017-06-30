@@ -44,7 +44,7 @@ final class OAuth {
 		}
 		if (!$r) {
 			/** @var array(string => mixed) $a */
-			$a = self::apiToken(S::s()->refreshToken());
+			$a = self::apiToken(['grant_type' => 'refresh_token', 'refresh_token' => S::s()->refreshToken()]);
 			$r = $a['access_token'];
 			$expiration = time() + round(0.8 * $a['expires_in']);
 		}
@@ -74,7 +74,22 @@ final class OAuth {
 	 * @return string
 	 * @throws DFE
 	 */
-	static function tokenR($code) {return self::apiToken($code)['refresh_token'];}
+	static function tokenR($code) {return self::apiToken([
+		// 2017-06-28
+		// Required
+		// 1) «The `authorization_code` that you acquired in the previous section».
+		// «Use the authorization code to request an access token»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#use-the-authorization-code-to-request-an-access-token
+		// 2) «The authorization code that the application requested.
+		// The application can use the authorization code
+		// to request an access token for the target resource.»
+		// «Successful response»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response
+		// 3) My note: a string of 611 caracters.
+		'code' => $code
+		// 2017-06-28
+		// Required.
+		// «Must be `authorization_code` for the authorization code flow».
+		,'grant_type' => 'authorization_code'
+	])['refresh_token'];}
 
 	/**
 	 * 2017-06-28
@@ -164,11 +179,11 @@ final class OAuth {
 	 * 2017-06-30
 	 * @used-by token()
 	 * @used-by tokenR()
-	 * @param string $code
+	 * @param array(string => string) $key
 	 * @return array(string => mixed)
 	 * @throws DFE
 	 */
-	private static function apiToken($code) {
+	private static function apiToken(array $key) {
 		// 2017-06-28
 		// «Now that you've acquired an authorization code and have been granted permission by the user,
 		// you can redeem the code for an access token to the desired resource,
@@ -180,22 +195,9 @@ final class OAuth {
 			->setConfig(['timeout' => 120])
 			->setHeaders(['accept' => 'application/json'])
 			->setMethod(C::POST)
-			->setParameterPost(self::p() + [
+			->setParameterPost(self::p() + $key + [
 				'client_secret' => S::s()->clientPassword()
-				// 2017-06-28
-				// Required
-				// 1) «The `authorization_code` that you acquired in the previous section».
-				// «Use the authorization code to request an access token»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#use-the-authorization-code-to-request-an-access-token
-				// 2) «The authorization code that the application requested.
-				// The application can use the authorization code
-				// to request an access token for the target resource.»
-				// «Successful response»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response
-				// 3) My note: a string of 611 caracters.
-				,'code' => $code
-				// 2017-06-28
-				// Required.
-				// «Must be `authorization_code` for the authorization code flow».
-				,'grant_type' => 'authorization_code'
+
 			])
 			->setUri('https://login.microsoftonline.com/common/oauth2/token')
 		;
