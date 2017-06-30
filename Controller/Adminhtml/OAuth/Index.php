@@ -11,9 +11,8 @@
 namespace Dfe\Dynamics365\Controller\Adminhtml\OAuth;
 use Df\Core\Exception as DFE;
 use Dfe\Dynamics365\Button as B;
-use Dfe\Dynamics365\OAuth;
+use Dfe\Dynamics365\API\OAuth;
 use Dfe\Dynamics365\Settings\General\OAuth as S;
-use Zend_Http_Client as C;
 /**
  * 2017-06-27
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -39,12 +38,7 @@ class Index extends \Df\OAuth\ReturnT {
 	 * @used-by \Df\OAuth\ReturnT::execute()
 	 * @throws DFE
 	 */
-	final protected function _execute() {
-		OAuth::validateResponse();
-		S::s()->refreshTokenSave(OAuth::tokenR(df_request('code')), ...($this->state(B::SCOPE)));
-		// 2017-06-30 It is required, because the backend settings are cached.
-		df_cache_clean();
-	}
+	final protected function _execute() {OAuth::getAndSaveTheRefreshToken();}
 
 	/**
 	 * 2017-06-28
@@ -55,16 +49,5 @@ class Index extends \Df\OAuth\ReturnT {
 	 * @used-by \Df\OAuth\ReturnT::execute()
 	 * @return string
 	 */
-	protected function redirectUrl() {return $this->state(B::URL);}
-
-	/**
-	 * 2017-06-29
-	 * @param string $k
-	 * @return string|mixed
-	 */
-	private function state($k) {
-		/** @var array(string => mixed) $r */
-		$r = dfc($this, function() {return df_json_decode(df_request('state'));});
-		return dfa($r, $k);
-	}
+	protected function redirectUrl() {return OAuth::state(OAuth::URL);}
 }

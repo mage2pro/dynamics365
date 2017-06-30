@@ -1,32 +1,55 @@
 <?php
-namespace Dfe\Dynamics365;
+namespace Dfe\Dynamics365\API;
 use Df\Core\Exception as DFE;
 use Dfe\Dynamics365\Settings\General\OAuth as S;
 use Zend_Http_Client as C;
 // 2017-06-28
 final class OAuth {
 	/**
-	 * 2017-06-30
-	 * @param string $path
-	 * @param string $method [optional]
-	 * @param array(string => mixed) $p [optional]
-	 * @return array(string => mixed)
+	 * 2017-06-29
+	 * Note 1.
+	 * «The requested access token.
+	 * The app can use this token to authenticate to the secured resource, such as a web API.»
+	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response-1
+	 * Note 2.
+	 * «Access Tokens are short-lived
+	 * and must be refreshed after they expire to continue accessing resources.
+	 * You can refresh the access_token by submitting another POST request to the `/token` endpoint,
+	 * but this time providing the `refresh_token` instead of the `code`.»
+	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#refreshing-the-access-tokens
+	 * Note 3 (mine). It is string of 446 caracters.
+	 * Note 4.
+	 * «Azure AD returns an access token upon a successful response.
+	 * To minimize network calls from the client application and their associated latency,
+	 * the client application should cache access tokens for the token lifetime
+	 * that is specified in the OAuth 2.0 response.
+	 * To determine the token lifetime, use either the `expires_in` or `expires_on` parameter values.
+	 * If a web API resource returns an `invalid_token` error code,
+	 * this might indicate that the resource has determined that the token is expired.
+	 * If the client and resource clock times are different (known as a "time skew"),
+	 * the resource might consider the token to be expired
+	 * before the token is cleared from the client cache.
+	 * If this occurs, clear the token from the cache, even if it is still within its calculated lifetime.»
+	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response-1
+	 * @used-by \Dfe\Dynamics365\API\R::p()
+	 * @return string
+	 * @throws DFE
 	 */
-	static function r($path, $method = C::GET, array $p = []) {
-		/** @var C $c */
-		$c = (new C)
-			->setConfig(['timeout' => 120])
-			->setHeaders([
-				'Accept' => 'application/json'
-				,'Authorization' => 'Bearer ' . self::token()
-				,'OData-MaxVersion' => '4.0'
-				,'OData-Version' => '4.0'
-			])
-			->setMethod($method)
-			->setUri(S::s()->url() . $path)
-		;
-		C::GET === $method ? $c->setParameterGet($p) : $c->setParameterPost($p);
-		return df_json_decode($c->request()->getBody());
+	static function token() {
+		/** @var string|null $r */
+		static $r;
+		/** @var int $expiration */
+		static $expiration;
+		if ($r && time() > $expiration) {
+			$r = null;
+		}
+		if (!$r) {
+			/** @var array(string => mixed) $a */
+			$a = self::apiToken(['grant_type' => 'refresh_token', 'refresh_token' => S::s()->refreshToken()]);
+			$r = $a['access_token'];
+			$expiration = time() + round(0.8 * $a['expires_in']);
+		}
+		return $r;
 	}
 
 	/**
@@ -48,26 +71,41 @@ final class OAuth {
 	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#refreshing-the-access-tokens
 	 * Note 3 (mine). It is string of 824 caracters.
 	 * @var string $refreshToken
-	 * @param string $code
-	 * @return string
 	 * @throws DFE
 	 */
-	static function tokenR($code) {return self::apiToken([
-		// 2017-06-28
-		// Required
-		// 1) «The `authorization_code` that you acquired in the previous section».
-		// «Use the authorization code to request an access token»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#use-the-authorization-code-to-request-an-access-token
-		// 2) «The authorization code that the application requested.
-		// The application can use the authorization code
-		// to request an access token for the target resource.»
-		// «Successful response»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response
-		// 3) My note: a string of 611 caracters.
-		'code' => $code
-		// 2017-06-28
-		// Required.
-		// «Must be `authorization_code` for the authorization code flow».
-		,'grant_type' => 'authorization_code'
-	])['refresh_token'];}
+	static function getAndSaveTheRefreshToken() {
+		self::validateResponse();
+		S::s()->refreshTokenSave(self::apiToken([
+			// 2017-06-28
+			// Required
+			// 1) «The `authorization_code` that you acquired in the previous section».
+			// «Use the authorization code to request an access token»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#use-the-authorization-code-to-request-an-access-token
+			// 2) «The authorization code that the application requested.
+			// The application can use the authorization code
+			// to request an access token for the target resource.»
+			// «Successful response»: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response
+			// 3) My note: a string of 611 caracters.
+			'code' => df_request('code')
+			// 2017-06-28
+			// Required.
+			// «Must be `authorization_code` for the authorization code flow».
+			,'grant_type' => 'authorization_code'
+		])['refresh_token'], ...(self::state(self::SCOPE)));
+		// 2017-06-30 It is required, because the backend settings are cached.
+		df_cache_clean();
+	}
+
+	/**
+	 * 2017-06-29
+	 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::redirectUrl()
+	 * @param string $k
+	 * @return string|mixed
+	 */
+	static function state($k) {
+		/** @var array(string => mixed) $r */
+		$r = dfcf(function() {return df_json_decode(df_request('state'));});
+		return dfa($r, $k);
+	}
 
 	/**
 	 * 2017-06-28
@@ -154,6 +192,19 @@ final class OAuth {
 	}
 
 	/**
+	 * 2017-06-29
+	 * @used-by getAndSaveTheRefreshToken()
+	 * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
+	 */
+	const SCOPE = 'scope';
+	/**
+	 * 2017-06-29
+	 * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
+	 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::redirectUrl()
+	 */
+	const URL = 'url';
+
+	/**
 	 * 2017-06-30
 	 * @used-by token()
 	 * @used-by tokenR()
@@ -173,10 +224,7 @@ final class OAuth {
 			->setConfig(['timeout' => 120])
 			->setHeaders(['accept' => 'application/json'])
 			->setMethod(C::POST)
-			->setParameterPost(self::tokenP() + $key + [
-				'client_secret' => S::s()->clientPassword()
-
-			])
+			->setParameterPost(self::tokenP() + $key + ['client_secret' => S::s()->clientPassword()])
 			// 2017-06-30
 			// @todo Whether it works for an on-premises Dynamics 365 instance?
 			// I do not have an on-premises instance, so I am unable to test it... :-(
@@ -213,53 +261,6 @@ final class OAuth {
 		 */
 		$r = df_json_decode($c->request()->getBody());
 		self::validateResponse($r);
-		return $r;
-	}
-
-	/**
-	 * 2017-06-29
-	 * Note 1.
-	 * «The requested access token.
-	 * The app can use this token to authenticate to the secured resource, such as a web API.»
-	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response-1
-	 * Note 2.
-	 * «Access Tokens are short-lived
-	 * and must be refreshed after they expire to continue accessing resources.
-	 * You can refresh the access_token by submitting another POST request to the `/token` endpoint,
-	 * but this time providing the `refresh_token` instead of the `code`.»
-	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#refreshing-the-access-tokens
-	 * Note 3 (mine). It is string of 446 caracters.
-	 * Note 4.
-	 * «Azure AD returns an access token upon a successful response.
-	 * To minimize network calls from the client application and their associated latency,
-	 * the client application should cache access tokens for the token lifetime
-	 * that is specified in the OAuth 2.0 response.
-	 * To determine the token lifetime, use either the `expires_in` or `expires_on` parameter values.
-	 * If a web API resource returns an `invalid_token` error code,
-	 * this might indicate that the resource has determined that the token is expired.
-	 * If the client and resource clock times are different (known as a "time skew"),
-	 * the resource might consider the token to be expired
-	 * before the token is cleared from the client cache.
-	 * If this occurs, clear the token from the cache, even if it is still within its calculated lifetime.»
-	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response-1
-	 * @used-by r()
-	 * @return string
-	 * @throws DFE
-	 */
-	private static function token() {
-		/** @var string|null $r */
-		static $r;
-		/** @var int $expiration */
-		static $expiration;
-		if ($r && time() > $expiration) {
-			$r = null;
-		}
-		if (!$r) {
-			/** @var array(string => mixed) $a */
-			$a = self::apiToken(['grant_type' => 'refresh_token', 'refresh_token' => S::s()->refreshToken()]);
-			$r = $a['access_token'];
-			$expiration = time() + round(0.8 * $a['expires_in']);
-		}
 		return $r;
 	}
 }

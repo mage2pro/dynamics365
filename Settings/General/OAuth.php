@@ -21,7 +21,7 @@ final class OAuth extends \Df\Config\Settings {
 	/**
 	 * 2017-06-29
 	 * @used-by \Dfe\Dynamics365\Button::getCommentText()
-	 * @used-by \Dfe\Dynamics365\OAuth::token()
+	 * @used-by \Dfe\Dynamics365\API\OAuth::token()
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @return string|null
 	 */
@@ -41,8 +41,8 @@ final class OAuth extends \Df\Config\Settings {
 
 	/**
 	 * 2017-06-28 «The root URL of your Dynamics 365 frontend»
-	 * @used-by \Dfe\Dynamics365\OAuth::r()
-	 * @used-by \Dfe\Dynamics365\OAuth::tokenP()
+	 * @used-by \Dfe\Dynamics365\API\OAuth::r()
+	 * @used-by \Dfe\Dynamics365\API\OAuth::tokenP()
 	 * @return string
 	 */
 	function url() {return $this->v();}

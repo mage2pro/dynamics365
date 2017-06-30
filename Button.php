@@ -1,5 +1,6 @@
 <?php
 namespace Dfe\Dynamics365;
+use Dfe\Dynamics365\API\OAuth;
 use Df\Framework\Form\ElementI;
 use Dfe\Dynamics365\Settings\General\OAuth as S;
 use Magento\Config\Model\Config\CommentInterface as IComment;
@@ -146,13 +147,13 @@ class Button extends AE implements ElementI, IComment {
 				 * We will store the refresh token in this configuration scope.
 				 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index
 				 */
-            	self::SCOPE => df_scope()
+            	OAuth::SCOPE => df_scope()
 				/**
 				 * 2017-06-29
 				 * The page we need to return to after the authentication.
 				 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index
 				 */
-            	,self::URL => df_current_url()
+            	,OAuth::URL => df_current_url()
 			])
 		] + OAuth::tokenP()));
 		df_fe_init($this, __CLASS__, [], ['url' => $url]);
@@ -166,18 +167,5 @@ class Button extends AE implements ElementI, IComment {
 	private function authenticated() {return dfc($this, function() {return
 		!!S::s()->refreshToken(df_scope())
 	;});}
-
-	/**
-	 * 2017-06-29
-	 * @used-by onFormInitialized()
-	 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::_execute()
-	 */
-	const SCOPE = 'scope';
-	/**
-	 * 2017-06-29
-	 * @used-by onFormInitialized()
-	 * @used-by \Dfe\Dynamics365\Controller\Adminhtml\OAuth\Index::redirectUrl()
-	 */
-	const URL = 'url';
 }
 
