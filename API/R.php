@@ -7,9 +7,34 @@ use Zend_Http_Client as C;
 final class R {
 	/**
 	 * 2017-06-30
+	 * 2017-07-01 «account EntityType»: https://msdn.microsoft.com/en-us/library/mt607894.aspx
+	 * «Business that represents a customer or potential customer.
+	 * The company that is billed in business transactions.»
 	 * @return array(string => mixed)
 	 */
 	static function accounts() {return self::p(__FUNCTION__);}
+
+	/**
+	 * 2017-07-01 «pricelevel EntityType»: https://msdn.microsoft.com/en-us/library/mt607683.aspx
+	 * «Entity that defines pricing levels.»
+	 * @return array(string => mixed)
+	 */
+	static function pricelevels() {return self::p(__FUNCTION__);}
+
+	/**
+	 * 2017-07-01 «productpricelevel EntityType»: https://msdn.microsoft.com/en-us/library/mt592996.aspx
+	 * «Information about how to price a product in the specified price level,
+	 * including pricing method, rounding option, and discount type based on a specified product unit.»
+	 * @return array(string => mixed)
+	 */
+	static function productpricelevels() {return self::p(__FUNCTION__);}
+
+	/**
+	 * 2017-07-01 «product EntityType»: https://msdn.microsoft.com/en-us/library/mt607876.aspx
+	 * «Information about products and their pricing information.»
+	 * @return array(string => mixed)
+	 */
+	static function products() {return self::p(__FUNCTION__);}
 
 	/**
 	 * 2017-06-30
@@ -78,6 +103,6 @@ final class R {
 			df_sentry(__CLASS__, $message, ['extra' => ['Request' => $req, 'Response' => $res]]);
 			throw $ex;
 		}
-		return $r;
+		return array_map('df_ksort', $r['value']);
 	}
 }
