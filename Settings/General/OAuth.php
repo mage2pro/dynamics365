@@ -20,6 +20,11 @@ final class OAuth extends \Df\Config\Settings {
 
 	/**
 	 * 2017-06-29
+	 * 2017-07-02
+	 * We do not encrypt the refresh token in the database,
+	 * because it is used only with the @see clientPassword(),
+	 * which is encrypted in the database.
+	 * @see \Dfe\Dynamics365\API\OAuth::apiToken()
 	 * @used-by \Dfe\Dynamics365\Button::getCommentText()
 	 * @used-by \Dfe\Dynamics365\API\OAuth::token()
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
