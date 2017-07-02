@@ -13,13 +13,13 @@ final class Basic extends TestCase {
 	function invalid() {$this->p('dummy');}
 
 	/** 2017-04-23 */
-	function metadata() {xdebug_break(); echo R::metadata();}
+	function metadata() {echo R::metadata();}
 
 	/** 2017-07-01 */
-	function products() {echo df_dump(df_json_encode_pretty(array_filter(
-		R::products(), function(array $p) {return df_starts_with($p['name'], 'Stripe');}
-	)));}
+	function products() {$this->o(array_filter(R::products(), function(array $p) {return
+		df_starts_with($p['name'], 'Stripe')
+	;}));}
 
 	/** 2017-06-30 */
-	function service() {echo df_dump(df_json_encode_pretty(R::service()));}
+	function service() {$this->o((R::service()));}
 }

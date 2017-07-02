@@ -18,12 +18,14 @@ abstract class Client {
 
 	/**
 	 * 2017-07-02
+	 * @used-by \Dfe\Dynamics365\API\R::metadata()
+	 * @used-by \Dfe\Dynamics365\API\R::p()
 	 * @param string $path
-	 * @param string|null $method [optional]
 	 * @param array(string => mixed) $p [optional]
+	 * @param string|null $method [optional]
 	 * @throws DFE
 	 */
-	final function __construct($path, $method = null, array $p = []) {
+	final function __construct($path, array $p = [], $method = null) {
 		$this->_path = $path;
 		$this->_c = new C;
 		$this->_c->setMethod($method = $method ?: C::GET);

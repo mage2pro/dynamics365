@@ -70,9 +70,12 @@ final class R {
 	 * 2017-07-01 «productpricelevel EntityType»: https://msdn.microsoft.com/en-us/library/mt592996.aspx
 	 * «Information about how to price a product in the specified price level,
 	 * including pricing method, rounding option, and discount type based on a specified product unit.»
+	 * @param string $priceLevelId [optional]
 	 * @return array(string => mixed)
 	 */
-	static function productpricelevels() {return self::p(__FUNCTION__);}
+	static function productpricelevels($priceLevelId = null) {return self::p(__FUNCTION__, df_clean([
+		'$filter' => !$priceLevelId ? null : "_pricelevelid_value eq $priceLevelId"
+	]));}
 
 	/**
 	 * 2017-07-01 «product EntityType»: https://msdn.microsoft.com/en-us/library/mt607876.aspx
@@ -92,8 +95,12 @@ final class R {
 	 * @used-by accounts()
 	 * @used-by service()
 	 * @param string $path
+	 * @param array(string => mixed) $p [optional]
+	 * @param string|null $method [optional]
 	 * @return array(string => mixed)
 	 * @throws DFE
 	 */
-	static function p($path) {return array_map('df_ksort', (new J($path))->p()['value']);}
+	static function p($path, array $p = [], $method = null) {return array_map(
+		'df_ksort', (new J($path, $p, $method))->p()['value']
+	);}
 }
