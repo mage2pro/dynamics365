@@ -6,6 +6,14 @@ use Magento\Store\Model\Store;
 /** @method static OAuth s() */
 final class OAuth extends \Df\Config\Settings {
 	/**
+	 * 2017-06-29
+	 * @used-by \Dfe\Dynamics365\Button::getCommentText()
+	 * @used-by \Dfe\Dynamics365\Button::getElementHtml()
+	 * @return bool
+	 */
+	function authenticatedB() {return dfc($this, function() {return !!$this->refreshToken(df_scope());});}
+
+	/**
 	 * 2017-04-23
 	 * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
 	 * @return string

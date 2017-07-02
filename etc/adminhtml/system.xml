@@ -132,6 +132,7 @@ https://mage2.pro/t/4076 -->
 				sortOrder='2'
 				translate='label'
 			>
+				<label>Products</label>
 				<field
 					id='priceList'
 					translate='label'

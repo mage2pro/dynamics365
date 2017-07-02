@@ -20,7 +20,7 @@ class Button extends AE implements ElementI, IComment {
 	 * @param string $v
 	 * @return string
 	 */
-	function getCommentText($v) {return $this->authenticated()
+	function getCommentText($v) {return S::s()->authenticatedB()
 		? "<b>Your Magento instance is <span class='df-ok'>successfully authenticated</span> to your Dynamics 365 instance.</b>"
 		: "<b>You <span class='df-warning'>need to authenticate</span> your Magento instance to your Dynamics 365 instance.</b>"
 	;}
@@ -34,7 +34,7 @@ class Button extends AE implements ElementI, IComment {
 	 * @return string
 	 */
 	function getElementHtml() {return df_block(W::class, [
-		'id' => $this->getHtmlId(), 'label' => __($this->authenticated() ? 'Re-authenticate' : 'Authenticate')
+		'id' => $this->getHtmlId(), 'label' => __(S::s()->authenticatedB() ? 'Re-authenticate' : 'Authenticate')
 	])->toHtml();}
 
 	/**
@@ -158,14 +158,5 @@ class Button extends AE implements ElementI, IComment {
 		] + OAuth::tokenP()));
 		df_fe_init($this, __CLASS__, [], ['url' => $url]);
 	}
-
-	/**
-	 * 2017-06-29
-	 * @used-by getCommentText()
-	 * @return bool
-	 */
-	private function authenticated() {return dfc($this, function() {return
-		!!S::s()->refreshToken(df_scope())
-	;});}
 }
 

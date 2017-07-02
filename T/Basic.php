@@ -12,10 +12,10 @@ final class Basic extends TestCase {
 	/** 2017-06-30 */
 	function invalid() {echo df_dump(df_json_encode_pretty(R::p('dummy')));}
 
-	/** 2017-07-01 */
+	/** @test 2017-07-01 */
 	function pricelevels() {echo df_dump(df_json_encode_pretty(R::pricelevels()));}
 
-	/** @test 2017-07-01 */
+	/** 2017-07-01 */
 	function productpricelevels() {$this->p();}
 
 	/** 2017-07-01 */
