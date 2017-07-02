@@ -2,7 +2,7 @@ The extension integrates your Magento 2 store with the **[Microsoft Dynamics 365
 
 ## How to buy
 The extension is not released yet, so there is no way to buy it just now.  
-The extension will be released before 2017-07-18.   
+The extension will be released when I will want so.   
 
 ## How to install
 ### 1. Free installation service
