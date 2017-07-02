@@ -11,7 +11,7 @@ final class JSON extends \Dfe\Dynamics365\API\Client {
 	 * Any error returned in the response will be returned as JSON.
 	 * While your code should work even if this header isn’t included,
 	 * we recommend including it as a best practice.»
-	 * https://msdn.microsoft.com/en-us/library/gg334391.aspx#Anchor_2
+	 * https://msdn.microsoft.com/en-us/library/gg334391.aspx#bkmk_headers
 	 * @override
 	 * @see \Dfe\Dynamics365\API\Client::accept()
 	 * @used-by \Dfe\Dynamics365\API\Client::p()

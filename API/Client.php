@@ -43,6 +43,14 @@ abstract class Client {
 		$c->setHeaders([
 			'Accept' => "application/{$this->accept()}"
 			,'Authorization' => 'Bearer ' . OAuth::token()
+			// 2017-07-03
+			// «The current OData version is 4.0, but future versions may allow for new capabilities.
+			// To ensure that there is no ambiguity about the OData version
+			// that will be applied to your code at that point in the future,
+			// you should always include an explicit statement of the current OData version
+			// and the Maximum version to apply in your code.
+			// Use both OData-Version and OData-MaxVersion headers set to a value of 4.0.»
+			// https://msdn.microsoft.com/en-us/library/gg334391.aspx#bkmk_headers
 			,'OData-MaxVersion' => '4.0'
 			,'OData-Version' => '4.0'
 			,'User-Agent' => sprintf('The «Dynamics 365» extension for Magento 2 (https://mage2.pro/c/extensions/dynamics365) used on the %s website', df_domain_current())
