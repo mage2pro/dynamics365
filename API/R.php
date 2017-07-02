@@ -15,6 +15,14 @@ final class R {
 	static function accounts() {return self::p(__FUNCTION__);}
 
 	/**
+	 * 2017-07-02 https://msdn.microsoft.com/en-us/library/mt608119.aspx
+	 * «Retrieves the default price level (price list) for the current user
+	 * based on the user’s territory relationship with the price level.»
+	 * @return array(string => mixed)
+	 */
+	static function GetDefaultPriceLevel() {return self::p(__FUNCTION__.'()');}
+
+	/**
 	 * 2017-07-01 «pricelevel EntityType»: https://msdn.microsoft.com/en-us/library/mt607683.aspx
 	 * «Entity that defines pricing levels.
 	 * Display Name: `Price List`
@@ -66,6 +74,7 @@ final class R {
 					,'Authorization' => 'Bearer ' . OAuth::token()
 					,'OData-MaxVersion' => '4.0'
 					,'OData-Version' => '4.0'
+					,'User-Agent' => sprintf('The «Dynamics 365» extension for Magento 2 (https://mage2.pro/c/extensions/dynamics365) used on the %s website', df_domain_current())
 				])
 				->setMethod($method)
 				->setUri(df_cc_path(S::s()->url(), 'api/data/v8.2', $path))

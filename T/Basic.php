@@ -25,12 +25,4 @@ final class Basic extends TestCase {
 
 	/** 2017-06-30 */
 	function service() {echo df_dump(df_json_encode_pretty(R::service()));}
-
-	/**
-	 * 2017-07-01
-	 * @param string|null $f [optional]
-	 */
-	private function p($f = null) {echo df_dump(df_json_encode_pretty(call_user_func([
-		R::class, $f ?: df_caller_f()
-	])));}
 }
