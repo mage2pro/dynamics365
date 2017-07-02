@@ -16,7 +16,10 @@ final class R {
 
 	/**
 	 * 2017-07-01 «pricelevel EntityType»: https://msdn.microsoft.com/en-us/library/mt607683.aspx
-	 * «Entity that defines pricing levels.»
+	 * «Entity that defines pricing levels.
+	 * Display Name: `Price List`
+	 * Primary Key: `pricelevelid`
+	 * Primary Name `Attribute: name`»
 	 * @used-by \Dfe\Dynamics365\Source\PriceList::fetch()
 	 * @return array(string => mixed)
 	 */
