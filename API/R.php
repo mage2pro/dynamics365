@@ -1,8 +1,8 @@
 <?php
 namespace Dfe\Dynamics365\API;
 use Df\Core\Exception as DFE;
-use Dfe\Dynamics365\Settings\General\OAuth as S;
-use Zend_Http_Client as C;
+use Dfe\Dynamics365\API\Client\JSON as J;
+use Dfe\Dynamics365\API\Client\XML as X;
 // 2017-06-30
 final class R {
 	/**
@@ -20,7 +20,15 @@ final class R {
 	 * based on the user’s territory relationship with the price level.»
 	 * @return array(string => mixed)
 	 */
-	static function GetDefaultPriceLevel() {return self::p(__FUNCTION__.'()');}
+	static function GetDefaultPriceLevel() {return self::p(
+		"pricelevels/Microsoft.Dynamics.CRM.GetDefaultPriceLevel()"
+	);}
+
+	/**
+	 * 2017-07-02 «CSDL metadata document»: https://msdn.microsoft.com/en-us/library/mt607990.aspx#bkmk_csdl
+	 * @return string
+	 */
+	static function metadata() {return (new X('$' . __FUNCTION__))->p();}
 
 	/**
 	 * 2017-07-01 «pricelevel EntityType»: https://msdn.microsoft.com/en-us/library/mt607683.aspx
@@ -59,65 +67,8 @@ final class R {
 	 * @used-by accounts()
 	 * @used-by service()
 	 * @param string $path
-	 * @param string $method [optional]
-	 * @param array(string => mixed) $p [optional]
 	 * @return array(string => mixed)
 	 * @throws DFE
 	 */
-	static function p($path, $method = C::GET, array $p = []) {return df_cache_get_simple(
-		null, function($path, $method = C::GET, array $p = []) {
-			/** @var C $c */
-			$c = (new C)
-				->setConfig(['timeout' => 120])
-				->setHeaders([
-					'Accept' => 'application/json'
-					,'Authorization' => 'Bearer ' . OAuth::token()
-					,'OData-MaxVersion' => '4.0'
-					,'OData-Version' => '4.0'
-					,'User-Agent' => sprintf('The «Dynamics 365» extension for Magento 2 (https://mage2.pro/c/extensions/dynamics365) used on the %s website', df_domain_current())
-				])
-				->setMethod($method)
-				->setUri(df_cc_path(S::s()->url(), 'api/data/v8.2', $path))
-			;
-			C::GET === $method ? $c->setParameterGet($p) : $c->setParameterPost($p);
-			/** @var array(string => mixed) $r */
-			$r = df_json_decode($c->request()->getBody());
-			/**
-			 * 2017-06-30
-			 * An error response looks like:
-			 *	{
-			 *		"error": {
-			 *			"code": "",
-			 *			"message": "Resource not found for the segment 'dummy'.",
-			 *			"innererror": {
-			 *				"message": "Resource not found for the segment 'dummy'.",
-			 *				"type": "Microsoft.OData.Core.UriParser.ODataUnrecognizedPathException",
-			 *				"stacktrace": "<...>"
-			 *			}
-			 *		}
-			 *	}
-			 * @var array(string => string|array(string => string))|null $e
-			 */
-			if ($e = dfa($r, 'error')) {
-				// 2017-06-30 It correctly works even if the key does not exist in the array.
-				unset($e['innererror']['stacktrace']);
-				/** @var string $message */
-				$message = dfa($e, 'message');
-				/** @var string $req */
-				$req = df_zf_http_last_req($c);
-				/** @var string $res */
-				$res = df_json_encode_pretty($e);
-				/** @var DFE $ex */
-				$ex = df_error_create(
-					"The «{$path}» Dynamics 365 Web API request has failed: «{$message}»."
-					."\nThe full error description:\n$res"
-					."\nThe full request:\n$req"
-				);
-				df_log_l(__CLASS__, $ex);
-				df_sentry(__CLASS__, $message, ['extra' => ['Request' => $req, 'Response' => $res]]);
-				throw $ex;
-			}
-			return array_map('df_ksort', $r['value']);
-		}, ...func_get_args());
-	}
+	static function p($path) {return array_map('df_ksort', (new J($path))->p()['value']);}
 }
