@@ -5,6 +5,13 @@ use Df\Core\Exception as DFE;
 final class JSON extends \Dfe\Dynamics365\API\Client {
 	/**
 	 * 2017-07-02
+	 * 2017-07-03
+	 * «Every request should include the Accept header value of application/json,
+	 * even when no response body is expected.
+	 * Any error returned in the response will be returned as JSON.
+	 * While your code should work even if this header isn’t included,
+	 * we recommend including it as a best practice.»
+	 * https://msdn.microsoft.com/en-us/library/gg334391.aspx#Anchor_2
 	 * @override
 	 * @see \Dfe\Dynamics365\API\Client::accept()
 	 * @used-by \Dfe\Dynamics365\API\Client::p()
