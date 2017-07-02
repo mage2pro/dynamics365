@@ -3,7 +3,7 @@ namespace Dfe\Dynamics365\T;
 use Dfe\Dynamics365\API\R as R;
 // 2017-04-23
 final class Basic extends TestCase {
-	/** 2017-04-23 */
+	/** @test 2017-04-23 */
 	function t00() {}
 
 	/** 2017-07-01 */
@@ -13,15 +13,9 @@ final class Basic extends TestCase {
 	function invalid() {$this->p('dummy');}
 
 	/** 2017-04-23 */
-	function metadata() {echo R::metadata();}
+	function metadata() {xdebug_break(); echo R::metadata();}
 
 	/** 2017-07-01 */
-	function pricelevels() {$this->p();}
-
-	/** 2017-07-01 */
-	function productpricelevels() {$this->p();}
-
-	/** @test 2017-07-01 */
 	function products() {echo df_dump(df_json_encode_pretty(array_filter(
 		R::products(), function(array $p) {return df_starts_with($p['name'], 'Stripe');}
 	)));}
