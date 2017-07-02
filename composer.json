@@ -11,7 +11,7 @@
 		"homepage": "https://mage2.pro/users/dmitry_fedyuk",
 		"role": "Developer"
 	}]
-	,"require": {"mage2pro/core": ">=2.7.32"}
+	,"require": {"mage2pro/core": ">=2.7.33"}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Dfe\\Dynamics365\\": ""}}
 	,"keywords": [
 		"CRM"
