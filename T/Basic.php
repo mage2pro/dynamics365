@@ -3,7 +3,7 @@ namespace Dfe\Dynamics365\T;
 use Dfe\Dynamics365\API\R as R;
 // 2017-04-23
 final class Basic extends TestCase {
-	/** 2017-04-23 */
+	/** @test 2017-04-23 */
 	function t00() {}
 
 	/** 2017-07-01 */
@@ -12,7 +12,7 @@ final class Basic extends TestCase {
 	/** 2017-06-30 */
 	function invalid() {echo df_dump(df_json_encode_pretty(R::p('dummy')));}
 
-	/** @test 2017-07-01 */
+	/** 2017-07-01 */
 	function pricelevels() {echo df_dump(df_json_encode_pretty(R::pricelevels()));}
 
 	/** 2017-07-01 */
