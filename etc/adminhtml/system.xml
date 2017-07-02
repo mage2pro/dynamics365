@@ -16,7 +16,6 @@
 			id='df_dynamics365'
             showInDefault='1' showInStore='1' showInWebsite='1'
             translate='label'
-            type='text'
 		>
 			<tab>_df</tab>
 			<label>Dynamics 365</label>
@@ -28,7 +27,6 @@
 				showInDefault='1' showInStore='1' showInWebsite='1'
 				sortOrder='1'
 				translate='label'
-				type='text'
 			>
 				<label>General</label>
 				<dfExtension>Dfe_Dynamics365</dfExtension>
@@ -49,7 +47,6 @@
 					showInDefault='1' showInStore='1' showInWebsite='1'
 					sortOrder='2'
 					translate='label'
-					type='text'
 				>
 					<label>OAuth 2.0</label>
 					<comment><![CDATA[Your Dynamics 365 instance should authenticate your Magento instance by the <a href='https://oauth.net/2/' target='_blank'>OAuth 2.0</a> protocol.]]></comment>
@@ -128,6 +125,29 @@ https://mage2.pro/t/4076 -->
 						<depends><field id='enable'>1</field></depends>
 					</field>
 				</group>
+			</group>
+			<group
+				id='products'
+				showInDefault='1' showInStore='1' showInWebsite='1'
+				sortOrder='2'
+				translate='label'
+			>
+				<field
+					id='priceList'
+					translate='label'
+					type='select'
+					sortOrder='1'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Price List</label>
+					<source_model>Dfe\Dynamics365\Source\PriceList</source_model>
+					<comment><![CDATA[]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+					</depends>
+				</field>
 			</group>
 		</section>
 	</system>
