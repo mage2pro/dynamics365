@@ -135,12 +135,10 @@ https://mage2.pro/t/4076 -->
 				<label>Products</label>
 				<field
 					id='priceList'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='1'
 					translate='label'
 					type='select'
-					sortOrder='1'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Price List</label>
 					<source_model>Dfe\Dynamics365\Source\PriceList</source_model>
