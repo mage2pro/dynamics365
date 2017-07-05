@@ -31,7 +31,7 @@ final class OAuth {
 	 * before the token is cleared from the client cache.
 	 * If this occurs, clear the token from the cache, even if it is still within its calculated lifetime.»
 	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response-1
-	 * @used-by \Dfe\Dynamics365\API\R::p()
+	 * @used-by \Dfe\Dynamics365\API\Client::headers()
 	 * @return string
 	 * @throws DFE
 	 */

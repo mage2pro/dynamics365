@@ -14,7 +14,7 @@ abstract class TestCase extends \Df\Core\TestCase {
 	 * @used-by \Dfe\Dynamics365\T\Price::productpricelevels()
 	 * @param array(string => mixed) $r
 	 */
-	final protected function o(array $r) {echo df_dump(df_json_encode_pretty($r));}
+	final protected function o(array $r) {echo df_json_encode_pretty($r);}
 
 	/**
 	 * 2017-07-01

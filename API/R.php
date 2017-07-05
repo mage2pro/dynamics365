@@ -100,7 +100,7 @@ final class R {
 	 * @return array(string => mixed)
 	 * @throws DFE
 	 */
-	static function p($path, array $p = [], $method = null) {return array_map(
-		'df_ksort', (new J($path, $p, $method))->p()['value']
-	);}
+	static function p($path, array $p = [], $method = null) {return
+		(new J($path, $p, $method))->p()['value']
+	;}
 }
