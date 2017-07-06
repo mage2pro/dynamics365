@@ -4,6 +4,14 @@ use Df\Core\Exception as DFE;
 // 2017-07-02
 final class JSON extends \Dfe\Dynamics365\API\Client {
 	/**
+	 * 2017-07-06
+	 * @override
+	 * @see \Df\API\Client::_construct()
+	 * @used-by \Df\API\Client::__construct()
+	 */
+	final protected function _construct() {parent::_construct(); $this->addFilterJsonDecode();}
+
+	/**
 	 * 2017-07-02
 	 * 2017-07-03
 	 * «Every request should include the Accept header value of application/json,
@@ -18,16 +26,6 @@ final class JSON extends \Dfe\Dynamics365\API\Client {
 	 * @return string
 	 */
 	protected function accept() {return 'json';}
-
-	/**
-	 * 2017-07-05
-	 * @override
-	 * @see \Df\API\Client::responseFilterC()
-	 * @used-by \Df\API\Client::p()
-	 * @used-by p()
-	 * @return string
-	 */
-	protected function responseFilterC() {return \Df\API\Response\Filter\JSON::class;}
 
 	/**
 	 * 2017-07-05
