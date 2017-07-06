@@ -4,7 +4,7 @@ use Df\Core\Exception as DFE;
 use Dfe\Dynamics365\API\Client\JSON as J;
 use Dfe\Dynamics365\API\Client\XML as X;
 // 2017-06-30
-final class R {
+final class Facade {
 	/**
 	 * 2017-06-30
 	 * 2017-07-01 «account EntityType»: https://msdn.microsoft.com/en-us/library/mt607894.aspx

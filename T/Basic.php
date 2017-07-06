@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\Dynamics365\T;
-use Dfe\Dynamics365\API\R as R;
+use Dfe\Dynamics365\API\Facade as F;
 // 2017-04-23
 final class Basic extends TestCase {
 	/** @test 2017-04-23 */
@@ -13,13 +13,13 @@ final class Basic extends TestCase {
 	function invalid() {$this->p('dummy');}
 
 	/** 2017-04-23 */
-	function metadata() {echo R::metadata();}
+	function metadata() {echo F::metadata();}
 
 	/** 2017-07-01 */
-	function products() {$this->o(array_filter(R::products(), function(array $p) {return
+	function products() {$this->o(array_filter(F::products(), function(array $p) {return
 		df_starts_with($p['name'], 'Stripe')
 	;}));}
 
 	/** 2017-06-30 */
-	function service() {$this->o((R::service()));}
+	function service() {$this->o((F::service()));}
 }
