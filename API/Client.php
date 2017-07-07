@@ -19,6 +19,7 @@ abstract class Client extends \Df\API\Client {
 	 * 2017-07-05
 	 * @override
 	 * @see \Df\API\Client::headers()
+	 * @used-by \Df\API\Client::__construct()
 	 * @used-by \Df\API\Client::p()
 	 * @return array(string => string)
 	 */
@@ -59,6 +60,7 @@ abstract class Client extends \Df\API\Client {
 	 * 2017-07-05
 	 * @override
 	 * @see \Df\API\Client::uriBase()
+	 * @used-by \Df\API\Client::__construct()
 	 * @used-by \Df\API\Client::p()
 	 * @return string
 	 */
