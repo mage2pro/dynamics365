@@ -1,6 +1,7 @@
 <?php
 namespace Dfe\Dynamics365\API;
 use Df\Core\Exception as DFE;
+use Dfe\Dynamics365\Settings\General as G;
 use Dfe\Dynamics365\Settings\General\OAuth as S;
 use Zend_Http_Client as C;
 // 2017-06-28
@@ -172,7 +173,7 @@ final class OAuth {
 		 * http://sharpshooting.github.io/authentication/2015/03/24/oauth2-on-dynamics-crm-online.html
 		 * Where is my Dynamics 365 frontend located? https://mage2.pro/t/3737
 		 */
-		,'resource' => $s->url()
+		,'resource' => G::s()->url()
 	]);}
 
 	/**
@@ -213,6 +214,7 @@ final class OAuth {
 	 * @throws DFE
 	 */
 	private static function apiToken(array $key) {
+		$s = S::s();
 		// 2017-06-28
 		// «Now that you've acquired an authorization code and have been granted permission by the user,
 		// you can redeem the code for an access token to the desired resource,
@@ -224,12 +226,11 @@ final class OAuth {
 			->setConfig(['timeout' => 120])
 			->setHeaders(['accept' => 'application/json'])
 			->setMethod(C::POST)
-			->setParameterPost(self::tokenP() + $key + ['client_secret' => S::s()->clientPassword()])
+			->setParameterPost(self::tokenP() + $key + ['client_secret' => $s->clientPassword()])
 			// 2017-06-30
-			// @todo Whether it works for an on-premises Dynamics 365 instance?
-			// I do not have an on-premises instance, so I am unable to test it... :-(
-			// «OAuth authorization endpoints» https://msdn.microsoft.com/en-us/library/dn531009.aspx#Anchor_7
-			->setUri('https://login.microsoftonline.com/common/oauth2/token')
+			// «OAuth authorization endpoints»
+			// https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauthurl
+			->setUri($s->url_token())
 		;
 		/**
 		 * 2017-06-28

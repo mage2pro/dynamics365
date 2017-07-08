@@ -27,6 +27,14 @@ final class OAuth extends \Df\Config\Settings {
 	function clientPassword() {return $this->p();}
 
 	/**
+	 * 2017-07-08 `My Dynamics 365 instance is self-hosted («on-premises»)`
+	 * @used-by url_auth()
+	 * @used-by url_token()
+	 * @return string
+	 */
+	function on_premises() {return $this->b();}
+
+	/**
 	 * 2017-06-29
 	 * 2017-07-02
 	 * We do not encrypt the refresh token in the database,
@@ -53,12 +61,18 @@ final class OAuth extends \Df\Config\Settings {
 	);}
 
 	/**
-	 * 2017-06-28 «The root URL of your Dynamics 365 frontend»
-	 * @used-by \Dfe\Dynamics365\API\OAuth::r()
-	 * @used-by \Dfe\Dynamics365\API\OAuth::tokenP()
+	 * 2017-07-08 «On-premises Token Endpoint»
+	 * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
 	 * @return string
 	 */
-	function url() {return $this->v();}
+	function url_auth() {return $this->on_premises() ? $this->v() : self::$SAAS_URL_BASE . 'authorize';}
+
+	/**
+	 * 2017-07-08 «On-premises Token Endpoint»
+	 * @used-by \Dfe\Dynamics365\API\OAuth::apiToken()
+	 * @return string
+	 */
+	function url_token() {return $this->on_premises() ? $this->v() : self::$SAAS_URL_BASE . 'token';}
 
 	/**
 	 * 2017-04-23
@@ -69,4 +83,12 @@ final class OAuth extends \Df\Config\Settings {
 	 * @return string
 	 */
 	protected function prefix() {return 'df_dynamics365/general/oauth';}
+
+	/**
+	 * 2017-07-08
+	 * @used-by url_auth()
+	 * @used-by url_token()
+	 * @var string
+	 */
+	private static $SAAS_URL_BASE = 'https://login.microsoftonline.com/common/oauth2/';
 }

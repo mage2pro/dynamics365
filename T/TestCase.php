@@ -4,6 +4,8 @@ use Dfe\Dynamics365\API\Facade as F;
 /**
  * 2017-04-23
  * @see \Dfe\Dynamics365\T\Basic
+ * @see \Dfe\Dynamics365\T\OAuth
+ * @see \Dfe\Dynamics365\T\Price
  */
 abstract class TestCase extends \Df\Core\TestCase {
 	/**

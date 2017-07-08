@@ -56,7 +56,7 @@ class Button extends AE implements ElementI, IComment {
 		// OAuth 2.0 auth code grant: https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#request-an-authorization-code
 		// «common» is a special tenant identifier value to request a tenant-independent token:
 		$isOpenID = false;  /** @var bool $isOpenID */
-		$url = 'https://login.microsoftonline.com/common/oauth2/authorize?' . http_build_query(df_clean([
+		$url = S::s()->url_auth() . '?' . http_build_query(df_clean([
 			// 2017-06-27
 			// 1) OAuth 2.0 auth code grant: optional.
 			// «Provides a hint about the tenant or domain that the user should use to sign in.

@@ -1,7 +1,7 @@
 <?php
 namespace Dfe\Dynamics365\API;
 use Df\Core\Exception as DFE;
-use Dfe\Dynamics365\Settings\General\OAuth as S;
+use Dfe\Dynamics365\Settings\General as G;
 /**
  * 2017-07-02
  * @see \Dfe\Dynamics365\API\Client\JSON
@@ -64,5 +64,5 @@ abstract class Client extends \Df\API\Client {
 	 * @used-by \Df\API\Client::p()
 	 * @return string
 	 */
-	final protected function uriBase() {return S::s()->url() . '/api/data/v8.2';}
+	final protected function uriBase() {return G::s()->url() . '/api/data/v8.2';}
 }
