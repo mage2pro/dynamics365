@@ -50,7 +50,7 @@
 					type='text'
 				>
 					<label>The root URL of your Dynamics 365 frontend</label>
-					<comment><![CDATA[The value should like https://<b>&lt;your organization name&gt;</b>.crm.dynamics.com for a <a href='https://www.microsoft.com/en-US/Dynamics/crm-customer-center/dynamics-365-online-vs-on-premises-features-faq.aspx' target='_blank' title='Online vs on-premises features FAQ'>SaaS</a> (cloud, «online») instance, and is a custom URL for a <a href='https://technet.microsoft.com/en-us/library/hh699811.aspx' target='_blank' title='Deploy and administer Dynamics 365 (on-premises)'>self-hosted</a> («on-premises») instance.<br/><a href='https://mage2.pro/t/3737' alt='See the manual how to find it out' target='_blank'>Where is my Dynamics 365 frontend located?</a>]]></comment>
+					<comment><![CDATA[The value should like https://<b>&lt;your organization name&gt;</b>.crm.dynamics.com for a <a href='https://www.microsoft.com/en-US/Dynamics/crm-customer-center/dynamics-365-online-vs-on-premises-features-faq.aspx' target='_blank' title='Online vs on-premises features FAQ'>SaaS</a> (cloud, «online») instance, and is a custom URL for a <a href='https://technet.microsoft.com/en-us/library/hh699811.aspx' target='_blank' title='Deploy and administer Dynamics 365 (on-premises)'>self-hosted</a> («on-premises») instance.<br/><a href='https://mage2.pro/t/3737' title='See the manual how to find it out' target='_blank'>Where is my Dynamics 365 frontend located?</a>]]></comment>
 					<depends>
 						<field id='enable'>1</field>
 					</depends>
@@ -72,7 +72,7 @@
 						type='text'
 					>
 						<label>Client Identifier</label>
-						<comment><![CDATA[An OAuth 2.0 «Client Identifier», as defined in the <a href='https://tools.ietf.org/html/rfc6749#section-2.2' alt='RFC 6749 specification, Section 2.2: «Client Identifier»' target='_blank'>section 2.2</a> of the RFC 6749 specification.
+						<comment><![CDATA[An OAuth 2.0 «Client Identifier», as defined in the <a href='https://tools.ietf.org/html/rfc6749#section-2.2' title='RFC 6749 specification, Section 2.2: «Client Identifier»' target='_blank'>section 2.2</a> of the RFC 6749 specification.
 <br/>Microsoft Azure portal names this entity as «<b>Application ID</b>».
 <br/><a href='https://mage2.pro/t/3825' title='How to grant Magento 2 the permissions to access the Dynamics 365 web API?' target='_blank'>How to get it?</a>]]></comment>
 						<depends>
@@ -88,7 +88,7 @@
 						type='obscure'
 					>
 						<label>Client Password</label>
-						<comment><![CDATA[The OAuth 2.0 «Client Password» for the «Client Identifier» above, as defined in the <a href='https://tools.ietf.org/html/rfc6749#section-2.3.1' alt='RFC 6749 specification, Section 2.3.1: «Client Password»' target='_blank'>section 2.3.1</a> of the RFC 6749 specification.
+						<comment><![CDATA[The OAuth 2.0 «Client Password» for the «Client Identifier» above, as defined in the <a href='https://tools.ietf.org/html/rfc6749#section-2.3.1' title='RFC 6749 specification, Section 2.3.1: «Client Password»' target='_blank'>section 2.3.1</a> of the RFC 6749 specification.
 <br/>Microsoft Azure portal names this entity as «<b>Key</b>».
 <br/><a href='https://mage2.pro/t/3825' title='How to grant Magento 2 the permissions to access the Dynamics 365 web API?' target='_blank'>How to get it?</a>]]></comment>
 						<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
@@ -107,7 +107,7 @@
 						type='Df\Sso\FE\CustomerReturn'
 					>
 						<label>Redirection Endpoint</label>
-						<comment><![CDATA[The OAuth 2.0 «Redirection Endpoint», as defined in the <a href='https://tools.ietf.org/html/rfc6749#section-3.1.2' alt='RFC 6749 specification, Section 3.1.2: «Redirection Endpoint»' target='_blank'>section 3.1.2</a> of the RFC 6749 specification.
+						<comment><![CDATA[The OAuth 2.0 «Redirection Endpoint», as defined in the <a href='https://tools.ietf.org/html/rfc6749#section-3.1.2' title='RFC 6749 specification, Section 3.1.2: «Redirection Endpoint»' target='_blank'>section 3.1.2</a> of the RFC 6749 specification.
 <br/>Microsoft Azure portal names this entity as «<b>Sign-On URL</b>».
 <br/>Set it in your Microsoft Azure Active Directory <a href='https://mage2.pro/t/3825' title='How to grant Magento 2 the permissions to access the Dynamics 365 web API?' target='_blank'>app registration form</a> (Step 4).]]></comment>
 						<depends><field id='enable'>1</field></depends>
@@ -131,7 +131,7 @@
 						type='text'
 					>
 						<label>On-premises Token Endpoint</label>
-						<comment><![CDATA[<a href='https://mage2.pro/t/4151' alt='See the manual how to find it out' target='_blank'>Where to get it?</a>]]></comment>
+						<comment><![CDATA[<a href='https://mage2.pro/t/4151' title='See the manual how to find it out' target='_blank'>Where to get it?</a>]]></comment>
 						<depends>
 							<field id='enable'>1</field>
 							<field id='on_premises'>1</field>
@@ -146,7 +146,7 @@
 						type='text'
 					>
 						<label>On-premises Authorization Endpoint</label>
-						<comment><![CDATA[<a href='https://mage2.pro/t/4151' alt='See the manual how to find it out' target='_blank'>Where to get it?</a>]]></comment>
+						<comment><![CDATA[<a href='https://mage2.pro/t/4151' title='See the manual how to find it out' target='_blank'>Where to get it?</a>]]></comment>
 						<depends>
 							<field id='enable'>1</field>
 							<field id='on_premises'>1</field>
