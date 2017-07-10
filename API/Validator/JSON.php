@@ -20,20 +20,11 @@ final class JSON extends \Df\API\Response\Validator {
 	/**
 	 * 2017-07-06
 	 * @override
-	 * @see \Df\API\Response\Validator::message()
-	 * @used-by \Df\API\Response\Validator::validate()
+	 * @see \Df\API\IException::long()
+	 * @used-by \Df\API\Client::p()
 	 * @return string
 	 */
-	protected function message() {return dfa_deep($this->r(), 'error/message');}
-
-	/**
-	 * 2017-07-06
-	 * @override
-	 * @see \Df\API\Response\Validator::rs()
-	 * @used-by \Df\API\Response\Validator::validate()
-	 * @return string
-	 */
-	protected function rs() {
+	function long() {
 		/** @var array(string => mixed) $e */
 		$e = dfa($this->r(), 'error');
 		// 2017-06-30 It correctly works even if the key does not exist in the array.
@@ -44,11 +35,11 @@ final class JSON extends \Df\API\Response\Validator {
 	/**
 	 * 2017-07-06
 	 * @override
-	 * @see \Df\API\Response\Validator::title()
-	 * @used-by \Df\API\Response\Validator::validate()
+	 * @see \Df\API\IException::short()
+	 * @used-by \Df\API\Client::p()
 	 * @return string
 	 */
-	protected function title() {return 'Dynamics 365 Web';}
+	function short() {return dfa_deep($this->r(), 'error/message');}
 
 	/**
 	 * 2017-07-06
@@ -57,5 +48,5 @@ final class JSON extends \Df\API\Response\Validator {
 	 * @used-by \Df\API\Response\Validator::validate()
 	 * @return bool
 	 */
-	protected function valid() {return !dfa($this->r(), 'error');}
+	function valid() {return !dfa($this->r(), 'error');}
 }

@@ -13,7 +13,7 @@ final class Price extends TestCase {
 	/** 2017-07-01 */
 	function productpricelevels() {$this->o(F::productpricelevels(S::s()->priceList()));}
 
-	/** 2017-07-02 */
+	/** @test 2017-07-02 */
 	function priceList() {echo S::s()->priceList();}
 
 	/** 2017-07-02 */

@@ -8,7 +8,7 @@ final class OAuth extends TestCase {
 	function t00() {}
 
 	/**
-	 * @test 2017-07-08
+	 * 2017-07-08
 	 * «Discover the OAuth endpoint URL»
 	 * https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauth_discovery
 	 */
