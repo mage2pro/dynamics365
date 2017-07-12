@@ -25,7 +25,7 @@ abstract class Client extends \Df\API\Client {
 	 */
 	final protected function headers() {return [
 		'Accept' => "application/{$this->accept()}"
-		,'Authorization' => 'Bearer ' . OAuth::token()
+		,'Authorization' => 'Bearer ' . df_oauth_app($this)->token()
 		// 2017-07-03
 		// «The current OData version is 4.0, but future versions may allow for new capabilities.
 		// To ensure that there is no ambiguity about the OData version

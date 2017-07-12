@@ -5,8 +5,8 @@ namespace Dfe\Dynamics365\Settings;
 final class General extends \Df\Config\Settings {
 	/**
 	 * 2017-06-28 «The root URL of your Dynamics 365 frontend»
-	 * @used-by \Dfe\Dynamics365\API\OAuth::r()
-	 * @used-by \Dfe\Dynamics365\API\OAuth::tokenP()
+	 * @used-by \Dfe\Dynamics365\OAuth\App::r()
+	 * @used-by \Dfe\Dynamics365\OAuth\App::pCommon()
 	 * @return string
 	 */
 	function url() {return $this->v();}
