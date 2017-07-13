@@ -9,7 +9,7 @@ final class JSON extends \Dfe\Dynamics365\API\Client {
 	 * @see \Df\API\Client::_construct()
 	 * @used-by \Df\API\Client::__construct()
 	 */
-	final protected function _construct() {parent::_construct(); $this->addFilterJsonDecode();}
+	final protected function _construct() {parent::_construct(); $this->resJson();}
 
 	/**
 	 * 2017-07-02
