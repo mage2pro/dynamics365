@@ -14,7 +14,7 @@ final class OAuth extends TestCase {
 	 */
 	function discovery() {
 		/** @var C $c */
-		$c = (new C)
+		$c = df_zf_http(G::s()->url() . '/XRMServices/2011/Organization.svc')
 			->setConfig(['timeout' => 120])
 			// 2017-07-08
 			// «The discovery process is started by sending an unauthorized HTTP request
@@ -22,8 +22,6 @@ final class OAuth extends TestCase {
 			// «The bearer challenge is now optional.
 			// Doing a GET without an authorization header yields the same results.»
 			->setHeaders(['Authorization' => 'Bearer'])
-			->setMethod(C::GET)
-			->setUri(G::s()->url() . '/XRMServices/2011/Organization.svc')
 		;
 		echo df_dump($c->request()->getHeaders());
 	}
