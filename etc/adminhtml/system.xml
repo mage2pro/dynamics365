@@ -162,7 +162,7 @@
 <!-- 2017-06-29
 «How to implement a dynamically generated comment for a backend configuration field?»
 https://mage2.pro/t/4076 -->
-						<comment model='Dfe\Dynamics365\Button' />
+						<comment model='Dfe\Dynamics365\Button'/>
 						<depends><field id='enable'>1</field></depends>
 					</field>
 				</group>
