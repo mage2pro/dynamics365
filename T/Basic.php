@@ -13,7 +13,7 @@ final class Basic extends TestCase {
 	function invalid() {$this->p('dummy');}
 
 	/** 2017-04-23 */
-	function metadata() {echo F::metadata();}
+	function metadata() {print_r(F::metadata());}
 
 	/** 2017-07-01 */
 	function products() {$this->o(array_filter(F::products(), function(array $p) {return

@@ -23,6 +23,6 @@ final class OAuth extends TestCase {
 			// Doing a GET without an authorization header yields the same results.»
 			->setHeaders(['Authorization' => 'Bearer'])
 		;
-		echo df_dump($c->request()->getHeaders());
+		print_r(df_dump($c->request()->getHeaders()));
 	}
 }

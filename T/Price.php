@@ -14,8 +14,8 @@ final class Price extends TestCase {
 	function productpricelevels() {$this->o(F::productpricelevels(S::s()->priceList()));}
 
 	/** @test 2017-07-02 */
-	function priceList() {echo S::s()->priceList();}
+	function priceList() {print_r(S::s()->priceList());}
 
 	/** 2017-07-02 */
-	function GetDefaultPriceLevel() {echo $this->p();}
+	function GetDefaultPriceLevel() {print_r($this->p());}
 }
