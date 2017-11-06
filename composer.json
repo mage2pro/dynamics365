@@ -1,7 +1,7 @@
 {
 	"name": "mage2pro/dynamics365"
 	,"version": "0.2.7"
-	,"description": "The «Microsoft Dynamics 365» extension for Magento 2."
+	,"description": "Microsoft Dynamics 365 integration with Magento 2"
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro/c/extensions/dynamics365"
 	,"license": "proprietary"
