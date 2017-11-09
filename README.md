@@ -1,4 +1,4 @@
-The extension integrates your Magento 2 based webstore with the **[Microsoft Dynamics 365](https://www.microsoft.com/dynamics365)** ERP / CRM software.
+This extension integrates a Magento 2 based webstore with the **[Microsoft Dynamics 365](https://www.microsoft.com/dynamics365)** ERP / CRM software.
 
 ## How to buy
 The extension is not released yet, so there is no way to buy it just now.  
