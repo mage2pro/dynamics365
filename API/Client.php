@@ -61,7 +61,7 @@ abstract class Client extends \Df\API\Client {
 	 * @override
 	 * @see \Df\API\Client::urlBase()
 	 * @used-by \Df\API\Client::__construct()
-	 * @used-by \Df\API\Client::_p()
+	 * @used-by \Df\API\Client::url()
 	 * @return string
 	 */
 	final protected function urlBase() {return G::s()->url() . '/api/data/v8.2';}
