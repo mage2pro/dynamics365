@@ -4,8 +4,8 @@
 	xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd"
 >
 	<router id='admin'>
-		<route id='Dfe_Dynamics365' frontName='dfe-dynamics365'>
-			<module name='Dfe_Dynamics365' before='Magento_Backend'/>
+		<route frontName='dfe-dynamics365' id='Dfe_Dynamics365'>
+			<module before='Magento_Backend' name='Dfe_Dynamics365'/>
 		</route>
 	</router>
 </config>
