@@ -1,5 +1,5 @@
 <?php
-namespace Dfe\Dynamics365\T;
+namespace Dfe\Dynamics365\Test;
 use Dfe\Dynamics365\Settings\General as G;
 use Zend_Http_Client as C;
 // 2017-07-08

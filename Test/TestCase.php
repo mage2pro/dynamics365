@@ -1,19 +1,19 @@
 <?php
-namespace Dfe\Dynamics365\T;
+namespace Dfe\Dynamics365\Test;
 use Dfe\Dynamics365\API\Facade as F;
 /**
  * 2017-04-23
- * @see \Dfe\Dynamics365\T\Basic
- * @see \Dfe\Dynamics365\T\OAuth
- * @see \Dfe\Dynamics365\T\Price
+ * @see \Dfe\Dynamics365\Test\Basic
+ * @see \Dfe\Dynamics365\Test\OAuth
+ * @see \Dfe\Dynamics365\Test\Price
  */
 abstract class TestCase extends \Df\Core\TestCase {
 	/**
 	 * 2017-07-03
 	 * @used-by p()
-	 * @used-by \Dfe\Dynamics365\T\Basic::products()
-	 * @used-by \Dfe\Dynamics365\T\Basic::service()
-	 * @used-by \Dfe\Dynamics365\T\Price::productpricelevels()
+	 * @used-by \Dfe\Dynamics365\Test\Basic::products()
+	 * @used-by \Dfe\Dynamics365\Test\Basic::service()
+	 * @used-by \Dfe\Dynamics365\Test\Price::productpricelevels()
 	 * @param array(string => mixed) $r
 	 */
 	final protected function o(array $r) {print_r(df_json_encode($r));}
