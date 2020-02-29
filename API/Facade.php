@@ -100,7 +100,5 @@ final class Facade {
 	 * @return array(string => mixed)
 	 * @throws DFE
 	 */
-	static function p($path, array $p = [], $method = null) {return
-		(new J($path, $p, $method))->p()['value']
-	;}
+	static function p($path, array $p = [], $method = null) {return (new J($path, $p, $method))->p()['value'];}
 }
