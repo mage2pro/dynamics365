@@ -31,7 +31,7 @@ final class JSON extends \Dfe\Dynamics365\API\Client {
 	 * 2017-07-05
 	 * @override
 	 * @see \Df\API\Client::responseValidatorC()
-	 * @used-by \Df\API\Client::p()
+	 * @used-by \Df\API\Client::_p()
 	 * @return string
 	 */
 	protected function responseValidatorC() {return \Dfe\Dynamics365\API\Validator\JSON::class;}
