@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\Dynamics365\Settings\General;
-// 2017-04-23
+# 2017-04-23
 /** @method static OAuth s() */
 final class OAuth extends \Df\OAuth\Settings {
 	/**

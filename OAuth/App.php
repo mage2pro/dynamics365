@@ -3,7 +3,7 @@ namespace Dfe\Dynamics365\OAuth;
 use Df\Core\Exception as DFE;
 use Dfe\Dynamics365\Settings\General as G;
 use Dfe\Dynamics365\Settings\General\OAuth as S;
-// 2017-06-28
+# 2017-06-28
 final class App extends \Df\OAuth\App {
 	/**
 	 * 2017-06-28

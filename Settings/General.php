@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\Dynamics365\Settings;
-// 2017-04-23
+# 2017-04-23
 /** @method static General s() */
 final class General extends \Df\Config\Settings {
 	/**

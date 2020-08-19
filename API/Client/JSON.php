@@ -1,7 +1,7 @@
 <?php
 namespace Dfe\Dynamics365\API\Client;
 use Df\Core\Exception as DFE;
-// 2017-07-02
+# 2017-07-02
 final class JSON extends \Dfe\Dynamics365\API\Client {
 	/**
 	 * 2017-07-06

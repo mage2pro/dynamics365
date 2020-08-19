@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\Dynamics365\API\Client;
-// 2017-07-02
+# 2017-07-02
 final class XML extends \Dfe\Dynamics365\API\Client {
 	/**
 	 * 2017-07-02

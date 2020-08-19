@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\Dynamics365\Settings;
-// 2017-07-02
+# 2017-07-02
 /** @method static Products s() */
 final class Products extends \Df\Config\Settings {
 	/**
