@@ -36,4 +36,3 @@ class Button extends \Df\OAuth\FE\Button {
 		,'response_mode' => 'form_post'
 	]);}
 }
-
