@@ -10,7 +10,7 @@ use Dfe\Dynamics365\Settings\General as G;
 abstract class Client extends \Df\API\Client {
 	/**
 	 * 2017-07-02
-	 * @used-by headers()
+	 * @used-by self::headers()
 	 * @return string
 	 */
 	abstract protected function accept();
@@ -23,7 +23,7 @@ abstract class Client extends \Df\API\Client {
 	 * @used-by \Df\API\Client::_p()
 	 * @return array(string => string)
 	 */
-	final protected function headers() {return [
+	final protected function headers():array {return [
 		'Accept' => "application/{$this->accept()}"
 		,'Authorization' => 'Bearer ' . df_oauth_app($this)->token()
 		# 2017-07-03
@@ -62,7 +62,6 @@ abstract class Client extends \Df\API\Client {
 	 * @see \Df\API\Client::urlBase()
 	 * @used-by \Df\API\Client::__construct()
 	 * @used-by \Df\API\Client::url()
-	 * @return string
 	 */
-	final protected function urlBase() {return G::s()->url() . '/api/data/v8.2';}
+	final protected function urlBase():string {return G::s()->url() . '/api/data/v8.2';}
 }

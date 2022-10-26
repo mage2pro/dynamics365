@@ -16,7 +16,6 @@ final class General extends \Df\Config\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
-	 * @return string
 	 */
-	protected function prefix() {return 'df_dynamics365/general';}
+	protected function prefix():string {return 'df_dynamics365/general';}
 }

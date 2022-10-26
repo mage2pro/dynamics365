@@ -92,8 +92,8 @@ final class Facade {
 
 	/**
 	 * 2017-06-30
-	 * @used-by accounts()
-	 * @used-by service()
+	 * @used-by self::accounts()
+	 * @used-by self::service()
 	 * @param string $path
 	 * @param array(string => mixed) $p [optional]
 	 * @param string|null $method [optional]

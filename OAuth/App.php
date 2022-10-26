@@ -48,8 +48,8 @@ final class App extends \Df\OAuth\App {
 	 * 2017-07-10
 	 * @override
 	 * @see \Df\OAuth\App::ss()
-	 * @used-by urlAuth()
-	 * @used-by urlToken()
+	 * @used-by self::urlAuth()
+	 * @used-by self::urlToken()
 	 * @used-by \Df\OAuth\App::getAndSaveTheRefreshToken()
 	 * @used-by \Df\OAuth\App::pCommon()
 	 * @used-by \Df\OAuth\App::requestToken()

@@ -10,7 +10,7 @@ use Dfe\Dynamics365\API\Facade as F;
 abstract class TestCase extends \Df\Core\TestCase {
 	/**
 	 * 2017-07-03
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @used-by \Dfe\Dynamics365\Test\Basic::products()
 	 * @used-by \Dfe\Dynamics365\Test\Basic::service()
 	 * @used-by \Dfe\Dynamics365\Test\Price::productpricelevels()
