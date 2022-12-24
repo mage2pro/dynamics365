@@ -28,9 +28,8 @@ final class OAuth extends \Df\OAuth\Settings {
 	 * 2017-07-08 My Dynamics 365 instance is self-hosted («on-premises»).
 	 * @used-by self::url_auth()
 	 * @used-by self::url_token()
-	 * @return string
 	 */
-	private function on_premises() {return $this->b();}
+	private function on_premises():string {return $this->b();}
 
 	/**
 	 * 2017-07-08
