@@ -35,7 +35,7 @@ final class Facade {
 	 * «CSDL metadata document»: https://msdn.microsoft.com/en-us/library/mt607990.aspx#bkmk_csd
 	 * @return array(string => mixed)
 	 */
-	static function GetDefaultPriceLevel() {
+	static function GetDefaultPriceLevel():array {
 		# 2017-07-03 @todo I do not understand how to call the GetDefaultPriceLevel() function.
 		df_should_not_be_here();
 		return self::p(
