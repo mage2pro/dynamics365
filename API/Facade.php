@@ -57,7 +57,7 @@ final class Facade {
 	 * @used-by \Dfe\Dynamics365\Source\PriceList::fetch()
 	 * @return array(string => mixed)
 	 */
-	static function pricelevels() {return self::p(__FUNCTION__);}
+	static function pricelevels():array {return self::p(__FUNCTION__);}
 
 	/**
 	 * 2017-07-01 «productpricelevel EntityType»: https://msdn.microsoft.com/en-us/library/mt592996.aspx
