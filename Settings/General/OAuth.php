@@ -6,9 +6,8 @@ final class OAuth extends \Df\OAuth\Settings {
 	/**
 	 * 2017-07-08 «On-premises Token Endpoint»
 	 * @used-by \Dfe\Dynamics365\Button::url()
-	 * @return string
 	 */
-	function url_auth() {return $this->on_premises() ? $this->v() : self::$SAAS_URL_BASE . 'authorize';}
+	function url_auth():string {return $this->on_premises() ? $this->v() : self::$SAAS_URL_BASE . 'authorize';}
 
 	/**
 	 * 2017-07-08 «On-premises Token Endpoint»
