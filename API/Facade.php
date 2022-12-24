@@ -12,7 +12,7 @@ final class Facade {
 	 * The company that is billed in business transactions.»
 	 * @return array(string => mixed)
 	 */
-	static function accounts() {return self::p(__FUNCTION__);}
+	static function accounts():array {return self::p(__FUNCTION__);}
 
 	/**
 	 * 2017-07-02
