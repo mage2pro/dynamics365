@@ -13,7 +13,7 @@ final class App extends \Df\OAuth\App {
 	 * @used-by \Df\OAuth\FE\Button::onFormInitialized()
 	 * @return array(string => string)
 	 */
-	function pCommon() {return parent::pCommon() + [
+	function pCommon():array {return parent::pCommon() + [
 		/**
 		 * 2017-06-27
 		 * Note 1.
