@@ -5,13 +5,13 @@ use Zend_Http_Client as C;
 # 2017-07-08
 final class OAuth extends TestCase {
 	/** 2017-07-08 @test */
-	function t00() {}
+	function t00():void {}
 
 	/**
 	 * 2017-07-08
 	 * «Discover the OAuth endpoint URL»Ж https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauth_discovery
 	 */
-	function discovery() {
+	function discovery():void {
 		/** @var C $c */
 		$c = df_zf_http(G::s()->url() . '/XRMServices/2011/Organization.svc')
 			->setConfig(['timeout' => 120])
