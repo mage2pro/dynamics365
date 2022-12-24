@@ -16,23 +16,17 @@ final class Facade {
 
 	/**
 	 * 2017-07-02
-	 * Note 1:
-	 * «Retrieves the default price level (price list) for the current user
+	 * 1) «Retrieves the default price level (price list) for the current user
 	 * based on the user’s territory relationship with the price level.»
 	 * https://msdn.microsoft.com/en-us/library/mt608119.aspx
-	 *
-	 * Note 2:
-	 * «To invoke a bound function,
+	 * 2) «To invoke a bound function,
 	 * append the full name of the function to the URL
 	 * and include any named parameters within the parentheses following the function name.
 	 * The full function name includes the namespace Microsoft.Dynamics.CRM.
 	 * Functions that aren’t bound must not use the full name.»
-	 *
-	 * Note 3:
-	 * «A bound function must be invoked using a URI to set the first parameter value.
+	 * 3) «A bound function must be invoked using a URI to set the first parameter value.
 	 * You can’t set it as a named parameter value.»
-	 *
-	 * Note 4:
+	 * 4)
 	 * <Function Name="GetDefaultPriceLevel" IsBound="true" IsComposable="true">
 	 *		<Parameter Name="entityset" Type="Collection(mscrm.pricelevel)" Nullable="false"/>
 	 *		<Parameter Name="EntityName" Type="Edm.String" Nullable="false" Unicode="false"/>
