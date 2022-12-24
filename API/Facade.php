@@ -65,7 +65,7 @@ final class Facade {
 	 * including pricing method, rounding option, and discount type based on a specified product unit.»
 	 * @return array(string => mixed)
 	 */
-	static function productpricelevels(string $priceLevelId = '') {return self::p(__FUNCTION__, df_clean([
+	static function productpricelevels(string $priceLevelId = ''):array {return self::p(__FUNCTION__, df_clean([
 		'$filter' => !$priceLevelId ? null : "_pricelevelid_value eq $priceLevelId"
 	]));}
 
