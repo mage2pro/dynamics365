@@ -7,9 +7,8 @@ final class General extends \Df\Config\Settings {
 	 * 2017-06-28 «The root URL of your Dynamics 365 frontend»
 	 * @used-by \Dfe\Dynamics365\OAuth\App::r()
 	 * @used-by \Dfe\Dynamics365\OAuth\App::pCommon()
-	 * @return string
 	 */
-	function url() {return $this->v();}
+	function url():string {return $this->v();}
 
 	/**
 	 * 2017-04-23
