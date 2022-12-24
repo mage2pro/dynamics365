@@ -87,9 +87,8 @@ final class Facade {
 	 * @used-by self::accounts()
 	 * @used-by self::service()
 	 * @param array(string => mixed) $p [optional]
-	 * @param string|null $method [optional]
 	 * @return array(string => mixed)
 	 * @throws DFE
 	 */
-	static function p(string $path, array $p = [], $method = null) {return (new J($path, $p, $method))->p()['value'];}
+	static function p(string $path, array $p = [], string $method = '') {return (new J($path, $p, $method))->p()['value'];}
 }
