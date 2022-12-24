@@ -80,7 +80,7 @@ final class Facade {
 	 * 2017-06-30
 	 * @return array(string => mixed)
 	 */
-	static function service() {return self::p('');}
+	static function service():array {return self::p('');}
 
 	/**
 	 * 2017-06-30
