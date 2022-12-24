@@ -63,10 +63,9 @@ final class Facade {
 	 * 2017-07-01 «productpricelevel EntityType»: https://msdn.microsoft.com/en-us/library/mt592996.aspx
 	 * «Information about how to price a product in the specified price level,
 	 * including pricing method, rounding option, and discount type based on a specified product unit.»
-	 * @param string $priceLevelId [optional]
 	 * @return array(string => mixed)
 	 */
-	static function productpricelevels($priceLevelId = null) {return self::p(__FUNCTION__, df_clean([
+	static function productpricelevels(string $priceLevelId = '') {return self::p(__FUNCTION__, df_clean([
 		'$filter' => !$priceLevelId ? null : "_pricelevelid_value eq $priceLevelId"
 	]));}
 
