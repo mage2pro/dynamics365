@@ -20,7 +20,6 @@ abstract class TestCase extends \Df\Core\TestCase {
 
 	/**
 	 * 2017-07-01
-	 * @param string|null $f [optional]
 	 */
-	final protected function p($f = null):void {$this->o((call_user_func([F::class, $f ?: df_caller_f()])));}
+	final protected function p(string $f = ''):void {$this->o((call_user_func([F::class, $f ?: df_caller_f()])));}
 }
