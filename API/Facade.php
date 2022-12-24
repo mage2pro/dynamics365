@@ -45,9 +45,8 @@ final class Facade {
 
 	/**
 	 * 2017-07-02 «CSDL metadata document»: https://msdn.microsoft.com/en-us/library/mt607990.aspx#bkmk_csdl
-	 * @return string
 	 */
-	static function metadata() {return (new X('$' . __FUNCTION__))->p();}
+	static function metadata():string {return (new X('$' . __FUNCTION__))->p();}
 
 	/**
 	 * 2017-07-01 «pricelevel EntityType»: https://msdn.microsoft.com/en-us/library/mt607683.aspx
