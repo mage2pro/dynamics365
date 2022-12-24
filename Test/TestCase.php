@@ -21,6 +21,7 @@ abstract class TestCase extends \Df\Core\TestCase {
 	/**
 	 * 2017-07-01
 	 * @used-by \Dfe\Dynamics365\Test\Basic::accounts()
+	 * @used-by \Dfe\Dynamics365\Test\Basic::invalid()
 	 */
 	final protected function p(string $f = ''):void {$this->o((call_user_func([F::class, $f ?: df_caller_f()])));}
 }
