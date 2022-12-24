@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/dynamics365"
-	,"version": "0.3.0"
+	,"version": "0.4.0"
 	,"description": "Microsoft Dynamics 365 integration with Magento 2"
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro/c/extensions/dynamics365"
@@ -11,7 +11,7 @@
 		"homepage": "https://www.upwork.com/fl/mage2pro",
 		"role": "Developer"
 	}]
-	,"require": {"mage2pro/core": ">=3.3.35"}
+	,"require": {"mage2pro/core": ">=9.0.3"}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Dfe\\Dynamics365\\": ""}}
 	,"keywords": [
 		"CRM"
