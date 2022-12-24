@@ -5,17 +5,17 @@ use Dfe\Dynamics365\Settings\Products as S;
 # 2017-07-02
 final class Price extends TestCase {
 	/** 2017-07-02 @test */
-	function t00() {}
+	function t00():void {}
 	
 	/** 2017-07-01 */
-	function pricelevels() {$this->p();}
+	function pricelevels():void {$this->p();}
 
 	/** 2017-07-01 */
-	function productpricelevels() {$this->o(F::productpricelevels(S::s()->priceList()));}
+	function productpricelevels():void {$this->o(F::productpricelevels(S::s()->priceList()));}
 
 	/** 2017-07-02 @test */
-	function priceList() {print_r(S::s()->priceList());}
+	function priceList():void {print_r(S::s()->priceList());}
 
 	/** 2017-07-02 */
-	function GetDefaultPriceLevel() {print_r($this->p());}
+	function GetDefaultPriceLevel():void {print_r($this->p());}
 }
