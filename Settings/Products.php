@@ -6,6 +6,7 @@ final class Products extends \Df\Config\Settings {
 	/**
 	 * 2017-07-02
 	 * @used-by \Dfe\Dynamics365\Test\Price::productpricelevels()
+	 * @used-by \Dfe\Dynamics365\Test\Price::priceList()
 	 */
 	function priceList():string {return $this->v();}
 
