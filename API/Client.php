@@ -13,7 +13,7 @@ abstract class Client extends \Df\API\Client {
 	 * @used-by self::headers()
 	 * @return string
 	 */
-	abstract protected function accept();
+	abstract protected function accept():string;
 
 	/**
 	 * 2017-07-05
