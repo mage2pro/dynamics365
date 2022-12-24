@@ -23,9 +23,8 @@ final class JSON extends \Dfe\Dynamics365\API\Client {
 	 * @override
 	 * @see \Dfe\Dynamics365\API\Client::accept()
 	 * @used-by \Dfe\Dynamics365\API\Client::headers()
-	 * @return string
 	 */
-	protected function accept() {return 'json';}
+	protected function accept():string {return 'json';}
 
 	/**
 	 * 2017-07-05
