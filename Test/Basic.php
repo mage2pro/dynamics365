@@ -3,7 +3,7 @@ namespace Dfe\Dynamics365\Test;
 use Dfe\Dynamics365\API\Facade as F;
 # 2017-04-23
 final class Basic extends TestCase {
-	/** @test 2017-04-23 */
+	/** 2017-04-23 @test */
 	function t00() {}
 
 	/** 2017-07-01 */

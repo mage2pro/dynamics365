@@ -24,9 +24,9 @@ final class JSON extends \Df\API\Response\Validator {
 	 * @used-by \Df\API\Client::_p()
 	 */
 	function long():string {
-		$e = dfa($this->r(), 'error'); /** @var array(string => mixed) $e */
+		$e = $this->r('error'); /** @var array(string => mixed) $e */
 		# 2017-06-30 It correctly works even if the key does not exist in the array.
-		unset($e['innererror']['stacktrace']);
+		unset($e['innererror']['stacktrace']); /** 2022-11-27 @see dfa_deep_unset() */
 		return df_json_encode($e);
 	}
 
@@ -36,7 +36,7 @@ final class JSON extends \Df\API\Response\Validator {
 	 * @see \Df\API\IException::short()
 	 * @used-by \Df\API\Client::_p()
 	 */
-	function short():string {return dfa_deep($this->r(), 'error/message');}
+	function short():string {return $this->r('error/message');}
 
 	/**
 	 * 2017-07-06
@@ -44,5 +44,5 @@ final class JSON extends \Df\API\Response\Validator {
 	 * @see \Df\API\Response\Validator::valid()
 	 * @used-by \Df\API\Client::_p()
 	 */
-	function valid():bool {return !dfa($this->r(), 'error');}
+	function valid():bool {return !$this->r('error');}
 }

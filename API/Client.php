@@ -46,7 +46,7 @@ abstract class Client extends \Df\API\Client {
 		 *	"_transactioncurrencyid_value": "fa42038c-da55-e711-810b-c4346bdcf161"
 		 * The same piece formatted:
 		 *	"_modifiedby_value": "6e0e07b6-1aec-415e-acef-1f27907ea64d",
-		 * 	"_modifiedby_value@OData.Community.Display.V1.FormattedValue": "Dmitry Fedyuk",
+		 * 	"_modifiedby_value@OData.Community.Display.V1.FormattedValue": "Dmitrii Fediuk",
 		 *	"_organizationid_value": "d4932579-c761-493f-9ecd-992067fc4035",
 		 *	"_organizationid_value@OData.Community.Display.V1.FormattedValue": "mage20",
 		 *	"_transactioncurrencyid_value": "fa42038c-da55-e711-810b-c4346bdcf161",

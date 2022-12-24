@@ -42,12 +42,12 @@ final class Facade {
 	 * @return array(string => mixed)
 	 */
 	static function GetDefaultPriceLevel() {
-		# 2017-07-03
-		# @todo I do not understand how to call the GetDefaultPriceLevel() function.
+		# 2017-07-03 @todo I do not understand how to call the GetDefaultPriceLevel() function.
 		df_should_not_be_here();
 		return self::p(
-		"pricelevels(90427858-7a77-e511-80d4-00155d2a68d1)/Microsoft.Dynamics.CRM.GetDefaultPriceLevel(EntityName='test')"
-	);}
+			"pricelevels(90427858-7a77-e511-80d4-00155d2a68d1)/Microsoft.Dynamics.CRM.GetDefaultPriceLevel(EntityName='test')"
+		);
+	}
 
 	/**
 	 * 2017-07-02 «CSDL metadata document»: https://msdn.microsoft.com/en-us/library/mt607990.aspx#bkmk_csdl

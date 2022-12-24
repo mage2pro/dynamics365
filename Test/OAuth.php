@@ -4,13 +4,12 @@ use Dfe\Dynamics365\Settings\General as G;
 use Zend_Http_Client as C;
 # 2017-07-08
 final class OAuth extends TestCase {
-	/** @test 2017-07-08 */
+	/** 2017-07-08 @test */
 	function t00() {}
 
 	/**
 	 * 2017-07-08
-	 * «Discover the OAuth endpoint URL»
-	 * https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauth_discovery
+	 * «Discover the OAuth endpoint URL»Ж https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauth_discovery
 	 */
 	function discovery() {
 		/** @var C $c */

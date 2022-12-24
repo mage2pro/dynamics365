@@ -8,9 +8,8 @@ class Button extends \Df\OAuth\FE\Button {
 	 * @override
 	 * @see \Df\OAuth\FE\Button::kExpiration()
 	 * @used-by \Df\OAuth\FE\Button::token()
-	 * @return bool
 	 */
-	final protected function kExpiration() {return 'expires_in';}
+	final protected function kExpiration():string {return 'expires_in';}
 
 	/**
 	 * 2017-07-10
@@ -22,7 +21,7 @@ class Button extends \Df\OAuth\FE\Button {
 	 * @used-by \Df\OAuth\FE\Button::onFormInitialized()
 	 * @return array(string => mixed)
 	 */
-	final protected function pExtra() {return df_clean([
+	final protected function pExtra():array {return df_clean([
 		# 2017-06-27
 		# «Provides a hint about the tenant or domain that the user should use to sign in.
 		# The value of the `domain_hint` is a registered domain for the tenant.

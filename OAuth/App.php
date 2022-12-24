@@ -55,25 +55,22 @@ final class App extends \Df\OAuth\App {
 	 * @used-by \Df\OAuth\App::requestToken()
 	 * @used-by \Df\OAuth\App::token()
 	 * @used-by \Df\OAuth\FE\Button::s()
-	 * @return S
 	 */
-	function ss() {return S::s();}
+	function ss():S {return S::s();}
 
 	/**
 	 * 2017-07-10
 	 * @override
 	 * @see \Df\OAuth\App::urlAuth()
 	 * @used-by \Df\OAuth\FE\Button::onFormInitialized()
-	 * @return string
 	 */
-	function urlAuth() {return $this->ss()->url_auth();}
+	function urlAuth():string {return $this->ss()->url_auth();}
 
 	/**
 	 * 2017-07-11
 	 * @override
 	 * @see \Df\OAuth\App::urlToken()
 	 * @used-by \Df\OAuth\App::requestToken()
-	 * @return string
 	 */
-	protected function urlToken() {return $this->ss()->url_token();}
+	protected function urlToken():string {return $this->ss()->url_token();}
 }
