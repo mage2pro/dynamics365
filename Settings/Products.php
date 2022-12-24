@@ -5,9 +5,8 @@ namespace Dfe\Dynamics365\Settings;
 final class Products extends \Df\Config\Settings {
 	/**
 	 * 2017-07-02
-	 * @return string
 	 */
-	function priceList() {return $this->v();}
+	function priceList():string {return $this->v();}
 
 	/**
 	 * 2017-07-02
