@@ -16,11 +16,11 @@ abstract class TestCase extends \Df\Core\TestCase {
 	 * @used-by \Dfe\Dynamics365\Test\Price::productpricelevels()
 	 * @param array(string => mixed) $r
 	 */
-	final protected function o(array $r) {print_r(df_json_encode($r));}
+	final protected function o(array $r):void {print_r(df_json_encode($r));}
 
 	/**
 	 * 2017-07-01
 	 * @param string|null $f [optional]
 	 */
-	final protected function p($f = null) {$this->o((call_user_func([F::class, $f ?: df_caller_f()])));}
+	final protected function p($f = null):void {$this->o((call_user_func([F::class, $f ?: df_caller_f()])));}
 }
