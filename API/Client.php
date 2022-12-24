@@ -13,7 +13,6 @@ abstract class Client extends \Df\API\Client {
 	 * @used-by self::headers()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::accept()
 	 * @see \Dfe\Dynamics365\API\Client\XML::accept()
-	 * @return string
 	 */
 	abstract protected function accept():string;
 
