@@ -23,6 +23,7 @@ abstract class TestCase extends \Df\Core\TestCase {
 	 * @used-by \Dfe\Dynamics365\Test\Basic::accounts()
 	 * @used-by \Dfe\Dynamics365\Test\Basic::invalid()
 	 * @used-by \Dfe\Dynamics365\Test\Price::pricelevels()
+	 * @used-by \Dfe\Dynamics365\Test\Price::GetDefaultPriceLevel()
 	 */
 	final protected function p(string $f = ''):void {$this->o((call_user_func([F::class, $f ?: df_caller_f()])));}
 }
