@@ -74,7 +74,7 @@ final class Facade {
 	 * «Information about products and their pricing information.»
 	 * @return array(string => mixed)
 	 */
-	static function products() {return self::p(__FUNCTION__);}
+	static function products():array {return self::p(__FUNCTION__);}
 
 	/**
 	 * 2017-06-30
