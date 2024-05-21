@@ -33,7 +33,7 @@ final class JSON extends \Df\API\Response\Validator {
 	/**
 	 * 2017-07-06
 	 * @override
-	 * @see \Df\API\IException::short()
+	 * @see \Df\API\Exception::short()
 	 * @used-by \Df\API\Client::_p()
 	 */
 	function short():string {return $this->r('error/message');}
