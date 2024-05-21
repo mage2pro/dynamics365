@@ -20,7 +20,7 @@ final class JSON extends \Df\API\Response\Validator {
 	/**
 	 * 2017-07-06
 	 * @override
-	 * @see \Df\API\IException::long()
+	 * @see \Df\API\Response\Validator::long()
 	 * @used-by \Df\API\Client::_p()
 	 */
 	function long():string {
