@@ -22,7 +22,6 @@ final class JSON extends \Df\API\Response\Validator {
 	 * @override
 	 * @see \Df\API\Response\Validator::long()
 	 * @used-by \Df\API\Client::_p()
-	 * @used-by \Df\API\Exception::message()
 	 */
 	function long():string {
 		$e = $this->r('error'); /** @var array(string => mixed) $e */
@@ -36,6 +35,7 @@ final class JSON extends \Df\API\Response\Validator {
 	 * @override
 	 * @see \Df\API\Exception::short()
 	 * @used-by \Df\API\Client::_p()
+	 * @used-by \Df\API\Exception::message()
 	 */
 	function short():string {return $this->r('error/message');}
 
